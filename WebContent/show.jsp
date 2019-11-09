@@ -14,9 +14,10 @@
 	    
 		try {
 	
+			String url = "db336.cwmds0owoihg.us-east-2.rds.amazonaws.com";
 			//Get the database connection
-			ApplicationDB db = new ApplicationDB();	
-			Connection con = db.getConnection();		
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection(url, "Admin_Saber", "ChrisBrefo63!");
 
 			//Create a SQL statement
 			Statement stmt = con.createStatement();
