@@ -13,7 +13,7 @@
 	<%
 	try {
 
-		String url = "db336.cwmds0owoihg.us-east-2.rds.amazonaws.com";
+		String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/BarBeerDrinkerSample";
 		//Get the database connection
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con = DriverManager.getConnection(url, "Admin_Saber", "ChrisBrefo63!");
