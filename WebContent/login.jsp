@@ -12,7 +12,11 @@
      <form action="checkLoginDetails.jsp" method="POST">
        Username: <input type="text" name="username"/> <br/>
        Password:<input type="password" name="password"/> <br/>
-       <input type="submit" value="Submit"/>
+       <input type="submit" value="Submit"/> <br/>
+     </form>
+     <form action="createLogin.jsp">
+     	<!--  <button type="button">Create Account</button>  -->
+     	 <a href='createLogin.jsp'>Create New Account</a>
      </form>
    </body>
 </html>
