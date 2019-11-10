@@ -5,7 +5,7 @@
 
 <%@ page import ="java.sql.*" %>
 <%
-String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/BarBeerDrinkerSample";
+String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
     String userid = request.getParameter("username");   
     String pwd = request.getParameter("password");
     Class.forName("com.mysql.jdbc.Driver");
