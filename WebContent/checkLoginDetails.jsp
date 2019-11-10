@@ -12,7 +12,7 @@ String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/T
     Connection con = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");
     Statement st = con.createStatement();
     ResultSet rs;
-    rs = st.executeQuery("select * from users where username='" + userid + "' and password='" + pwd + "'");
+    rs = st.executeQuery("select * from users where userid='" + userid + "' and password='" + pwd + "'");
     if (rs.next()) {
         session.setAttribute("user", userid); // the username will be stored in the session
         out.println("welcome " + userid);
