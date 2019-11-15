@@ -4,6 +4,6 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
 <%
-session.invalidate();
-response.sendRedirect("login.jsp");
+session.invalidate();//closes the session
+response.sendRedirect("login.jsp");//returns the user to the login page
 %>

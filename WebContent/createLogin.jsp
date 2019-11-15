@@ -9,6 +9,9 @@
       <title>Create Login Form</title>
    </head>
    <body>
+   <!-- Also if possible try to do the password and username constraints
+   		So make sure the passwords match, the password and username are between a certain amount of characters,
+   		and whatever else you feel like adding -->
    		<form action="createdAccount.jsp" method="POST">
        		New Username: <input type="text" name="username"/> <br/>
        		New Password:<input type="password" name="password"/> <br/>
