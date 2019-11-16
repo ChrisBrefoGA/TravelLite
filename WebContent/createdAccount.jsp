@@ -8,7 +8,7 @@
 try{
 String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
     String userid = request.getParameter("username");//receives the userid from the signup form 
-    String pwd = request.getParameter("password");//receives the users password from the signup form
+    String pwd = request.getParameter("pwd1");//receives the users password from the signup form
     Class.forName("com.mysql.jdbc.Driver");//SQL connection stuff
     Connection con = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");//SQL connection stuff
     Statement st = con.createStatement();//SQL connection stuff
@@ -23,8 +23,12 @@ String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/T
     ps.executeUpdate();//execute the statement with the loaded values
     con.close();//close the connection
    	out.println("You have successfully created a new account. Please <a href='login.jsp'>login</a> to your new account");
-}catch(Exception a){
+}
+catch(SQLIntegrityConstraintViolationException a) {
+    out.println("Username already exists. Try creating a different username. <a href='createLogin.jsp'>Sign up here</a>");	
+}
+catch(Exception a){
 	out.println(a);
-	out.println("You have not successfully created a new account please try again.<a href='createLogin.jsp'>Signup here</a>");	
+	out.println("You have not successfully created a new account please try again. <a href='createLogin.jsp'>Sign up here</a>");	
 }
 %>

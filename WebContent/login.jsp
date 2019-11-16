@@ -10,13 +10,14 @@
    </head>
    <body>
      <form action="checkLoginDetails.jsp" method="POST">
-       Username: <input type="text" name="username"/> <br/>
-       Password:<input type="password" name="password"/> <br/>
-       <input type="submit" value="Submit"/> <br/>
+       Username: <input type="text" name="username"/> <br/> <br>
+       Password:<input type="password" name="password"/> <br/> <br>
+       <input type="submit" value="Log In"/> <br/> <br>
      </form>
      <form action="createLogin.jsp">
-     	<!--  <button type="button">Create Account</button>  -->
+     <!-- TODO: make this into a button -->
      	 <a href='createLogin.jsp'>Create New Account</a>
+     	<!--  <button type="button">Create Account</button>  -->
      </form>
    </body>
 </html>
