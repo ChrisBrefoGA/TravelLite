@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>Login Form</title>
+      <title>Login</title>
    </head>
    <body>
      <form action="checkLoginDetails.jsp" method="POST">
