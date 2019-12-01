@@ -81,17 +81,12 @@
       form.pwd1.focus();
       return false;
     }
-
-    //alert("You entered a valid password: " + form.pwd1.value);
     return true;
   }
 
 </script>
    </head>
    <body>
-   <!-- Also if possible try to do the password and username constraints
-   		So make sure the passwords match, the password and username are between a certain amount of characters,
-   		and whatever else you feel like adding -->
    		<form action="createdAccount.jsp" method="POST" onsubmit="return checkForm(this);">
        		New Username: <input type="text" name="username"/> <br/> <br>
        		New Password:<input type="password" name="pwd1"/> <br/> <br>
