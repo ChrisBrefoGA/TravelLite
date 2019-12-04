@@ -8,7 +8,6 @@
    <head>
       <title>Create Login Form</title>
 	  <script type="text/javascript">
-
   function checkForm(form)
   {
     if(form.username.value == "") {
@@ -81,11 +80,9 @@
       form.pwd1.focus();
       return false;
     }
-
     //alert("You entered a valid password: " + form.pwd1.value);
     return true;
   }
-
 </script>
    </head>
    <body>
