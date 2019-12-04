@@ -19,8 +19,6 @@
      Departure Date: <input type="date" name="DEPARTURE DATE"/>
      Return Date: <input type="date" name="RETURN DATE"/> <br/> <br>
      <input type="submit" value="Search"/>
-  	 
-	
 	<a href='logout.jsp'>Log out</a>
 </body>
 </html>
