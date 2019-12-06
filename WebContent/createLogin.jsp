@@ -79,11 +79,7 @@
       alert("Error: Please check that the passwords you've entered match!");
       form.pwd1.focus();
       return false;
-    }
-<<<<<<< HEAD
-    //alert("You entered a valid password: " + form.pwd1.value);
-=======
->>>>>>> 3150b3573a8e74a12677d339558ee3e88fe25d96
+  }
     return true;
   }
 </script>
