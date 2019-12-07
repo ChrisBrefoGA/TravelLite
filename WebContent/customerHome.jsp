@@ -9,13 +9,13 @@
 <title>Home</title>
 </head>
 <body>
-	<h1>
-		Welcome
-		<%=session.getAttribute("user")%></h1>
-	<form>
+
+	<h1> Welcome <%=session.getAttribute("user")%> </h1>
+
+	<form action="flightSearchResults.jsp" method="POST">
 
 		<script type="text/javascript">
-	function isNumberKey(evt) {
+		function isNumberKey(evt) {
     		var charCode = (evt.which) ? evt.which : evt.keyCode
     		if (charCode > 31 && (charCode < 48 || charCode > 57))
         		return false;
@@ -27,29 +27,33 @@
     		if (charCode >= 48 && charCode <= 90)
         		return false;
     		return true;
-		}
+		}   	
      	</script>
 
 		<h2>Search for Flights in TravelLite!</h2>
 
-		Flight Class: <input type="radio" name="trip" value="One Way" checked>
+		<strong>Flight Class:</strong> <input type="radio" name="trip" value="One Way" checked>
+		
 		One Way <input type="radio" name="trip" value="Round Trip">
-		Round Trip<br /> <br> From: <input type="text" name="FROM"
-			onkeypress="return isLetterKey(event)" /> To: <input type="text"
+			
+		Round Trip<br/> <br> <strong>From:</strong> <input type="text" name="FROM"
+			onkeypress="return isLetterKey(event)" /> <strong>To:</strong> <input type="text"
 			name="TO" onkeypress="return isLetterKey(event)" /> <br /> <br>
 
-		Number of Passengers: <input name="someid" type="number"
+		<strong>Number of Passengers:</strong> <input name="someid" type="number"
 			onkeypress="return isNumberKey(event)" /> <br>
-		<br> Departure Date: <input type="date" name="DEPARTURE DATE" />
+		<br> <strong>Departure Date:</strong> <input type="date" name="DEPARTURE DATE" />
 
-		Return Date: <input type="date" name="RETURN DATE" /> <br /> <br>
+		<strong>Return Date:</strong> <input type="date" name="RETURN DATE" /> <br /> <br>
 
-		Flight Class: <select>
+		<strong>Flight Type:</strong>
+		<select>
 			<option value="Economy">Economy</option>
 			<option value="Business">Business</option>
-		</select> <br>
-		<br> <input type="submit" value="Search" />
-
+		</select> 
+		<br><br> 
+		
+		<input type="submit" value="Search" />
 		<button onclick="location.href='logout.jsp'" type="button">Logout</button>
 
 	</form>
