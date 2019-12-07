@@ -11,7 +11,5 @@
    </head>
  	
  	<body>
- 	
- 	
- 	
+ 		
  	</body>   
