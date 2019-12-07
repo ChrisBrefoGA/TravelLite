@@ -10,9 +10,11 @@
 </head>
 <body>
 	<h1>Welcome <%=session.getAttribute("user")%></h1>
-	<p>This is the customer page peasant</p> 
 	<form>
 		
+		<h2>Search for Flights in TravelLite!</h2>
+		
+		Flight Class:
 		<input type="radio" name="trip" value="One Way" checked> One Way
     	<input type="radio" name="trip" value="Round Trip"> Round Trip<br/> <br>
 	 	
