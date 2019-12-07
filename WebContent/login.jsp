@@ -15,8 +15,6 @@
    <h2 style = "text-align: center"><em>"We'll get you where you want to go!</em></h2>
 
      <form action="checkLoginDetails.jsp" method="POST">
-       First Name: <Input type = "text" name = "firstname"/> <br/> <br>
-       Last Name: <Input type = "text" name = "lastname"/> <br/> <br>
        Username: <input type="text" name="username"/> <br/> <br>
        Password:<input type="password" name="password"/> <br/> <br>
        <input type="submit" value="Log In"/> <br/> <br>

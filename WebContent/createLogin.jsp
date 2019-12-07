@@ -86,6 +86,8 @@
    </head>
    <body>
    		<form action="createdAccount.jsp" method="POST" onsubmit="return checkForm(this);">
+   			First Name: <Input type = "text" name = "firstname"/> <br/> <br>
+      		Last Name: <Input type = "text" name = "lastname"/> <br/> <br>
        		New Username: <input type="text" name="username"/> <br/> <br>
        		New Password:<input type="password" name="pwd1"/> <br/> <br>
        		Re-enter Password:<input type="password" name="pwd2"/> <br/>
