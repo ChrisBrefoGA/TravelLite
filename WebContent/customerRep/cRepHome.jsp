@@ -54,7 +54,7 @@
 			<button onclick="location.href='customerRepDelete.jsp'" type="button">Submit</button> <br> <br>
 	</form>
 
-		<button onclick="location.href='logout.jsp'" type="button">Logout</button> <br> <br>
+		<button onclick="location.href='../logout.jsp'" type="button">Logout</button> <br> <br>
 	
 </body>
 </html>

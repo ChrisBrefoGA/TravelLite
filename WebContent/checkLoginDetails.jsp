@@ -11,15 +11,15 @@ public int userAccess(String account, Connection cc){
     	ResultSet rs;//ResultSet for the query statement(Customer)
     	ResultSet rs2;//ResultSet for the query statement(Customer_rep)
     	ResultSet rs3;//ResultSet for the query statement(Admin)
-    	rs = ss.executeQuery("select * from Customer where user_name='" + account +"'");
+    	rs = ss.executeQuery("select * from Customer where userid='" + account +"'");
     	if(rs.next()){//if the account is a customer
     		return 1;
     	}
-   		rs2 = ss.executeQuery("select * from Customer_rep where user_name='" + account+"'");
+   		rs2 = ss.executeQuery("select * from Customer_rep where userid='" + account+"'");
     	if(rs2.next()){//if the account is a customer_rep
     		return 2;
     	}
-    	rs3 = ss.executeQuery("select * from Admin where user_name='" + account +"'");
+    	rs3 = ss.executeQuery("select * from Admin where userid='" + account +"'");
     	if(rs3.next()){//if the account is an Admin
     		return 3;
     	}

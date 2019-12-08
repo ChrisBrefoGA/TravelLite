@@ -15,7 +15,7 @@ String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/T
     Connection con = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");//SQL connection stuff
     Statement st = con.createStatement();//SQL connection stuff
     String insrt=("INSERT INTO users (userid, password, First_name, Last_name, account_id)"+"VALUES(?,?,?,?,?)");// THE Update string for the SQL Table Update
-    String insrt2 =("INSERT INTO Customer (user_name, account_num)"+"VALUES(?,?)");// THE Update string for the SQL Table Update
+    String insrt2 =("INSERT INTO Customer (userid, account_num)"+"VALUES(?,?)");// THE Update string for the SQL Table Update
     PreparedStatement ps = con.prepareStatement(insrt);//The string gets converted for SQL use
     PreparedStatement ps2 = con.prepareStatement(insrt2);//The string gets converted for SQL use		
     ps.setString(1,userid);//load the userid into the VALUES

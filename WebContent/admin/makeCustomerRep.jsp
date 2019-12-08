@@ -11,7 +11,7 @@ try{
     Class.forName("com.mysql.jdbc.Driver");//SQL connection stuff
     Connection con = DriverManager.getConnection(url2,"Admin_Saber", "ChrisBrefo63!");//SQL connection stuff
     Statement st = con.createStatement();//SQL connection stuff
-    ResultSet result_set = st.executeQuery("select * from Customer where user_name = '" + cust_username + "'");
+    ResultSet result_set = st.executeQuery("select * from Customer where userid = '" + cust_username + "'");
     if (result_set.next() == false) {
         System.out.println("Customer does not exist.");
     }
@@ -20,22 +20,22 @@ try{
         System.out.println(user_name);
 		int acct_num = result_set.getInt(2);
         System.out.println(acct_num);
-		//st.executeQuery("insert into Customer_rep (user_name, customer_rep_id) values (" + user_name +" ," + acct_num + ")");
-		//st.executeQuery("delete from Customer where user_name = '" + user_name + "'");
+		//st.executeQuery("insert into Customer_rep (userid, customer_rep_id) values (" + user_name +" ," + acct_num + ")");
+		//st.executeQuery("delete from Customer where userid = '" + user_name + "'");
 
-        String insrt=("INSERT INTO Customer_rep (user_name, customer_rep_id)"+"VALUES(?,?)");// THE Update string for the SQL Table Update
+        String insrt=("INSERT INTO Customer_rep (userid, customer_rep_id)"+"VALUES(?,?)");// THE Update string for the SQL Table Update
         PreparedStatement ps = con.prepareStatement(insrt);//The string gets converted for SQL use
         ps.setString(1,user_name);//load the userid into the VALUES
         ps.setInt(2, acct_num);//load the password into the VALUES
         ps.executeUpdate();//execute the statement with the loaded values
         System.out.println("past insert");
         /*
-        String insrt2=("delete from Customer where user_name = ?");// THE Update string for the SQL Table Update
+        String insrt2=("delete from Customer where userid = ?");// THE Update string for the SQL Table Update
         PreparedStatement ps2 = con.prepareStatement(insrt);//The string gets converted for SQL use
         ps2.setString(1,user_name);//load the userid into the VALUES
         ps2.executeUpdate();//execute the statement with the loaded values
         */
-        int i = st.executeUpdate("DELETE FROM Customer WHERE user_name='"+user_name + "'");
+        int i = st.executeUpdate("DELETE FROM Customer WHERE userid='"+user_name + "'");
         System.out.println(i);
     } 
 }
