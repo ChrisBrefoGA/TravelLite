@@ -44,7 +44,7 @@
 	
 	<br><br>
 	
-	<form action="updateCustomerRep.jsp" method ="POST">
+	<form action="makeCustomerRep.jsp" method ="POST">
        Enter a customer to be made a Customer Rep: <input type="text" name="cust">
        <input type="submit" value="Make Customer Rep"> <br>
     </form>
