@@ -44,6 +44,13 @@
 	
 	<br><br>
 	
+	<form action="updateCustomerRep.jsp" method ="POST">
+       Enter a customer to be made a Customer Rep: <input type="text" name="cust">
+       <input type="submit" value="Make Customer Rep"> <br>
+    </form>
+
+	<br><br>
+	
 	<% resultSet = statement.executeQuery("select * from Customer_rep");  %>
 	
 	<TABLE BORDER="1">
