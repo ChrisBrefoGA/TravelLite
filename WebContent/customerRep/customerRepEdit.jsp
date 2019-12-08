@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.Statement"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.sql.DriverManager"%>
+<% Class.forName("com.mysql.jdbc.Driver"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,48 +15,58 @@
 </head>
 <body>
 	<h1>
-		Registering flight for: 
+		Welcome
 		<%=session.getAttribute("user")%></h1>
-	<form>
+	<p>These are the current Customers bitch</p>
 
-		<script type="text/javascript">
-	function isNumberKey(evt) {
-    		var charCode = (evt.which) ? evt.which : evt.keyCode
-    		if (charCode > 31 && (charCode < 48 || charCode > 57))
-        		return false;
-    		return true;
-		}
-     	
-     	function isLetterKey(evt) {
-    		var charCode = (evt.which) ? evt.which : evt.keyCode
-    		if (charCode >= 48 && charCode <= 90)
-        		return false;
-    		return true;
-		}
-     	</script>
+	<p>Would you like to edit anything right now? (filler statement for
+		now)</p>
 
-		<h2>Search for Flights in TravelLite!</h2>
+	<% 
+		String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
+		Connection connection = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");
+		Statement statement = connection.createStatement();
+    	ResultSet resultSet = statement.executeQuery("select * from Customer");	
+    %>
 
-		Flight Class: <input type="radio" name="trip" value="One Way" checked>
-		One Way <input type="radio" name="trip" value="Round Trip">
-		Round Trip<br /> <br> From: <input type="text" name="FROM"
-			onkeypress="return isLetterKey(event)" /> To: <input type="text"
-			name="TO" onkeypress="return isLetterKey(event)" /> <br /> <br>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Customer Name</TH>
+			<TH>Customer ID</TH>
+		</TR>
+		<% while(resultSet.next()){ %>
+		<TR>
+			<TD><%= resultSet.getString(1) %></td>
+			<TD><%= resultSet.getString(2) %></TD>
+		</TR>
+		<% } %>
+	</TABLE>
+	
+	<br><br>
+	
+	<form action="updateCustomerRep.jsp" method ="POST">
+       Enter a customer to be made a Customer Rep: <input type="text" name="cust">
+       <input type="submit" value="Make Customer Rep"> <br>
+    </form>
 
-		Number of Passengers: <input name="someid" type="number"
-			onkeypress="return isNumberKey(event)" /> <br>
-		<br> Departure Date: <input type="date" name="DEPARTURE DATE" />
+	<br><br>
+	
+	<% resultSet = statement.executeQuery("select * from Customer_rep");  %>
+	
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Customer Representative Name</TH>
+			<TH>Customer Representative ID</TH>
+		</TR>
+		<% while(resultSet.next()){ %>
+		<TR>
+			<TD><%= resultSet.getString(1) %></td>
+			<TD><%= resultSet.getString(2) %></TD>
+		</TR>
+		<% } %>
+	</TABLE>
+	<br>
 
-		Return Date: <input type="date" name="RETURN DATE" /> <br /> <br>
-
-		Flight Class: <select>
-			<option value="Economy">Economy</option>
-			<option value="Business">Business</option>
-		</select> <br>
-		<br> <input type="submit" value="Search" />
-
-		<button onclick="location.href='cRepHome.jsp'" type="button">Return</button><br> <br>
-
-	</form>
+	<a href='logout.jsp'>Log out</a>
 </body>
 </html>

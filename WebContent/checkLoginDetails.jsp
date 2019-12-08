@@ -48,13 +48,13 @@ String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/T
         out.println("<a href='logout.jsp'>Log out</a>"); // or this
         int access = userAccess(userid, con);
         if(access == 1){//it's a customer account
-        	response.sendRedirect("customerHome.jsp");
+        	response.sendRedirect("customer/customerHome.jsp");
         }
         else if(access == 2){//it's a customer rep account
-        	response.sendRedirect("cRepHome.jsp");
+        	response.sendRedirect("customerRep/cRepHome.jsp");
         }
         else if(access == 3){//it's an admin account
-        	response.sendRedirect("adminHome.jsp");
+        	response.sendRedirect("admin/adminHome.jsp");
         }
     } else {
         out.println("Invalid password <a href='login.jsp'>try again</a>");
