@@ -14,7 +14,7 @@ String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/T
     Class.forName("com.mysql.jdbc.Driver");//SQL connection stuff
     Connection con = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");//SQL connection stuff
     Statement st = con.createStatement();//SQL connection stuff
-    String insrt=("INSERT INTO users (userid, password)"+"VALUES(?,?)");// THE Update string for the SQL Table Update
+    String insrt=("INSERT INTO users (userid, password, First_name, Last_name, account_id)"+"VALUES(?,?,?,?,?)");// THE Update string for the SQL Table Update
     String insrt2 =("INSERT INTO Customer (user_name, account_num)"+"VALUES(?,?)");// THE Update string for the SQL Table Update
     PreparedStatement ps = con.prepareStatement(insrt);//The string gets converted for SQL use
     PreparedStatement ps2 = con.prepareStatement(insrt2);//The string gets converted for SQL use		
@@ -22,7 +22,6 @@ String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/T
     ps.setString(2, pwd);//load the password into the VALUES
     ps.setString(3, firstname);
     ps.setString(4, lastname);
-    ps.executeUpdate();//execute the statement with the loaded values
     Random rand = new Random();
     boolean insert = false;
     int n = 0;
@@ -31,7 +30,9 @@ String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/T
     	 	n = rand.nextInt();
     		if(n < 0) n *= -1;
     	    ps2.setString(1,userid);//load user_name into the VALUES
+    	    ps.setInt(5,n);//load account_id into VALUES
     	    ps2.setInt(2, n);//load account_num into VALUES
+    	    ps.executeUpdate();//execute the statement with the loaded values
     	    ps2.executeUpdate();//add the account values into Customer
     	    insert = true;
     	}catch(Exception a){
