@@ -15,9 +15,7 @@
  	<form>
 		
 		<h2>Flight Search Results</h2>
-		
-		<br> <br>
-		
+				
 		Sort by:
 		<input type="radio" name="sort" value="price" checked> Price
     	<input type="radio" name="sort" value="departure time"> Departure time
@@ -36,16 +34,16 @@
  		<input type="checkbox" name="Number of stops" value="2"> 2<br> <br>
  		
  		Airline: 
-		<input type="checkbox" name="Airline" value="Frontier"> Frontier    
+		<input type="checkbox" name="Airline" value="Frontier"> Frontier  
  		<input type="checkbox" name="Airline" value="Spirit"> Spirit    
  		<input type="checkbox" name="Airline" value="Alaska"> Alaska    
-		<input type="checkbox" name="Airline" value="United"> United    
-		<input type="checkbox" name="Airline" value="Delta"> Delta<br> <br>
+		<input type="checkbox" name="Airline" value="United"> United 
+		<input type="checkbox" name="Airline" value="American"> American     
+		<input type="checkbox" name="Airline" value="Delta"> Delta
 		
+		<br> <br>
 		
-		
-		
-	
+
 	</form>
  	
  	</body>   

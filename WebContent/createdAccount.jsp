@@ -7,6 +7,8 @@
 <%
 try{
 String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
+	String firstname = request.getParameter("firstname");
+	String lastname = request.getParameter("lastname");
     String userid = request.getParameter("username");//receives the userid from the signup form 
     String pwd = request.getParameter("pwd1");//receives the users password from the signup form
     Class.forName("com.mysql.jdbc.Driver");//SQL connection stuff
@@ -18,6 +20,8 @@ String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/T
     PreparedStatement ps2 = con.prepareStatement(insrt2);//The string gets converted for SQL use		
     ps.setString(1,userid);//load the userid into the VALUES
     ps.setString(2, pwd);//load the password into the VALUES
+    ps.setString(3, firstname);
+    ps.setString(4, lastname);
     ps.executeUpdate();//execute the statement with the loaded values
     Random rand = new Random();
     boolean insert = false;
