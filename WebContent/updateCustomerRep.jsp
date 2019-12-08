@@ -11,10 +11,14 @@ try{
     Class.forName("com.mysql.jdbc.Driver");//SQL connection stuff
     Connection con = DriverManager.getConnection(url2,"Admin_Saber", "ChrisBrefo63!");//SQL connection stuff
     Statement st = con.createStatement();//SQL connection stuff
+<<<<<<< HEAD:WebContent/admin/makeCustomerRep.jsp
     ResultSet result_set = st.executeQuery("select * from Customer where userid = '" + cust_username + "'");
     if (result_set.next() == false) {
         System.out.println("Customer does not exist.");
     }
+=======
+    ResultSet result_set = st.executeQuery("select * from Customer where user_name = '" + cust_username + "'");
+>>>>>>> edbf73b24a3ee31157b464ec69db3fc997c9562b:WebContent/updateCustomerRep.jsp
 	while(result_set.next()) {
 		String user_name = result_set.getString(1);
         System.out.println(user_name);
@@ -28,7 +32,7 @@ try{
         ps.setString(1,user_name);//load the userid into the VALUES
         ps.setInt(2, acct_num);//load the password into the VALUES
         ps.executeUpdate();//execute the statement with the loaded values
-        System.out.println("past insert");
+
         /*
         String insrt2=("delete from Customer where userid = ?");// THE Update string for the SQL Table Update
         PreparedStatement ps2 = con.prepareStatement(insrt);//The string gets converted for SQL use
@@ -37,15 +41,11 @@ try{
         */
         int i = st.executeUpdate("DELETE FROM Customer WHERE userid='"+user_name + "'");
         System.out.println(i);
-    } 
-}
-catch(SQLException a) {
-    System.out.println(a);
-    System.out.println("Error in sql statements.");	
+    }
 }
 catch(Exception a){
-	System.out.println(a);
-	System.out.println("Error in sql statements.");	
+	out.println(a);
+	out.println("The customer you entered does not exist.");	
 }
 response.sendRedirect("adminHome.jsp");
 %>
