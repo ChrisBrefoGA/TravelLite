@@ -12,7 +12,7 @@
  	
  	<body>
  	
- 	<form action = "flightSortingTest.jsp" method = "POST">
+ 	<form action = "flightSearchResults.jsp" method = "POST">
 		
 		<h2>Search for Flights!</h2>
 				
@@ -38,7 +38,7 @@
 		
 		<br> <br>	
 		
-		<button onclick="window.location.href = 'flightSortingTest.jsp';" 
+		<button onclick="window.location.href = 'flightSearchResults.jsp';" 
 		type = "submit">Search Flights</button>
 	</form>
 	
