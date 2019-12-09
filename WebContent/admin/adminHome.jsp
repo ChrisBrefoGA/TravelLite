@@ -28,20 +28,16 @@
     </form>
 	<br><br>
 
+	<%-- whitelist the admin so they can't be deleted--%>
+
 	<form action="adminDelete.jsp" method ="POST">
        DELETE: enter a customer or customer rep to be deleted: <input type="text" name="user">
        <input type="submit" value="Delete User"> <br>
     </form>
 	<br><br>
 
-	<form action="adminDelete.jsp" method ="POST">
-       EDIT CUSTOMER: enter a customer or customer to be edited: <input type="text" name="user">
-       <input type="submit" value="Edit User"> <br>
-    </form>
-	<br><br>
-
-	<form action="adminDelete.jsp" method ="POST">
-       EDIT CUSTOMER REP: enter a customer rep to be edited: <input type="text" name="user">
+	<form action="adminEdit.jsp" method ="POST">
+       EDIT CUSTOMER: enter a customer or customer rep to be edited(give current username): <input type="text" name="user">
        <input type="submit" value="Edit User"> <br>
     </form>
 	<br><br>
