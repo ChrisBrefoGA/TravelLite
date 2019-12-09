@@ -54,7 +54,7 @@
 		<br><br> 
 		
 		<input type="submit" value="Search" />
-		<button onclick="location.href='../logout.jsp'" type="button">Logout</button>
+		<button onclick="location.href='logout.jsp'" type="button">Logout</button>
 
 	</form>
 </body>
