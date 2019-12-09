@@ -14,12 +14,9 @@
 <title>Home</title>
 </head>
 <body>
-	<h1>
-		Welcome
-		<%=session.getAttribute("user")%></h1>
-	<p>These are the current flights you filthy plebians</p>
+	<h1>Welcome <%=session.getAttribute("user")%></h1>
 
-	<p>Flight Table</p>
+	<strong><h2>Flight Results!</h2></strong>
     
 <%
     String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
