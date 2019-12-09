@@ -34,7 +34,14 @@
  		<br> <br>
  		
  		Airline: 
-		<input type="text" name="airline_name" value = "Frontier">
+ 		<select name = "airline_name">
+  			<option value="1">Spirit</option>
+  			<option value="2">Frontier</option>
+  			<option value="3">United Airlines</option>
+  			<option value="4">Delta</option>
+  			<option value="5">American Airlines</option>
+  			<option value="6">Alaska Airlines</option>
+		</select>
 		
 		<br> <br>	
 		

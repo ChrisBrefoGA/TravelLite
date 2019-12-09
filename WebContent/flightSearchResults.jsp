@@ -94,8 +94,8 @@
          <button onclick="window.location.href = 'logout.jsp';">Logout</button>
      </form>
      <br>
-	<form action="flightSearchResults.jsp">
-         <button onclick="window.location.href = 'flightSearchResults.jsp';">Back</button>
+	<form action="flightSearch.jsp">
+         <button onclick="window.location.href = 'flightSearch.jsp';">Back</button>
      </form>
 </body>
 </html>
