@@ -2,6 +2,17 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+
+<%
+try{
+	Object user = session.getAttribute("user");
+	user.toString();
+}catch(Exception a){
+	out.println("Please sign-in to an account!!<a href='../login.jsp'>login</a>");
+	return;
+}
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +65,7 @@
 		<br><br> 
 		
 		<input type="submit" value="Search" />
-		<button onclick="location.href='logout.jsp'" type="button">Logout</button>
+		<button onclick="location.href='../logout.jsp'" type="button">Logout</button>
 
 	</form>
 </body>

@@ -1,0 +1,174 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.Statement"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.sql.DriverManager"%>
+<% Class.forName("com.mysql.jdbc.Driver"); %>
+
+<%
+try{
+	Object user = session.getAttribute("user");
+	user.toString();
+}catch(Exception a){
+	out.println("Please sign-in to an account!!<a href='../login.jsp'>login</a>");
+	return;
+}
+%>
+
+<%
+String type = (String) session.getAttribute("type");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function validateForm() {
+	  var fid = document.forms["Add"]["fID"].value;
+	  var type = document.forms["Add"]["type"].value;
+	  var dDate = document.forms["Add"]["dDate"].value;
+	  var aDate = document.forms["Add"]["aDate"].value;
+	  var dTime = document.forms["Add"]["dTime"].value;
+	  var aTime = document.forms["Add"]["aTime"].value;
+	  var fFare = document.forms["Add"]["fFare"].value;
+	  var eFare = document.forms["Add"]["eFare"].value;
+	  var bFare = document.forms["Add"]["bFare"].value;
+	  var nos = document.forms["Add"]["nos"].value;
+	  var price = document.forms["Add"]["price"].value;
+	  var dAirport = document.forms["Add"]["dAirport"].value;
+	  var aAirport = document.forms["Add"]["aAirport"].value;
+	  var aID = document.forms["Add"]["aID"].value;
+	  if (fid.trim() == "" || type.trim() == "" || dDate.trim() == "" || aDate.trim() == ""
+			  || dTime.trim() == "" || aTime.trim() == "" || fFare.trim() == "" || eFare.trim() == ""
+			  || bFare.trim() == "" || nos.trim() == "" || price.trim() == "" || dAirport.trim() == ""
+			  || aAirport.trim() == "" || aID.trim() == "") {
+	    alert("ERROR: PLEASE ENTER ALL OF THE VALUES!!!");
+	    return false;
+	  }
+	}
+</script>
+<meta charset="ISO-8859-1">
+<title>Add</title>
+</head>
+<body>
+	<h1>
+		Welcome
+		<%=session.getAttribute("user")%></h1>
+	<p>Please add the information for this <%=type%> below in the form.</p>
+	<% 
+		String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
+		Connection connection = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");
+		Statement statement = connection.createStatement();
+    	ResultSet resultSet = statement.executeQuery("select * from "+ type +"");	
+    %>
+<div>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Flight#</TH>
+			<TH>Type</TH>
+			<TH>Departure Date</TH>
+			<TH>Arrival Date</TH>
+			<TH>Departure Time</TH>
+			<TH>Arrival Time</TH>
+			<TH>Fare First</TH>
+			<TH>Fare Economy</TH>
+			<TH>Fare Business</TH>
+			<TH>Available Seats</TH>
+			<TH>Is Full</TH> <!-- default is always false -->
+			<TH>Number of Stops</TH>
+			<TH>Price</TH>
+			<TH>Booking fee</TH><!-- static value -->
+			<TH>Departure Airport</TH>
+			<TH>Arrival Airport</TH>
+			<TH>Aircraft ID</TH>
+		</TR>
+		<% while(resultSet.next()){ %>
+		<TR>
+			<TD><%= resultSet.getString(1) %></td>
+			<TD><%= resultSet.getString(2) %></TD>
+			<TD><%= resultSet.getString(3) %></td>
+			<TD><%= resultSet.getString(4) %></TD>
+			<TD><%= resultSet.getString(5) %></td>
+			<TD><%= resultSet.getString(6) %></TD>
+			<TD><%= resultSet.getString(7) %></td>
+			<TD><%= resultSet.getString(8) %></TD>
+			<TD><%= resultSet.getString(9) %></td>
+			<TD><%= resultSet.getString(10) %></TD>
+			<TD><%= resultSet.getString(11) %></td>
+			<TD><%= resultSet.getString(12) %></TD>
+		    <TD><%= resultSet.getString(13) %></td>
+			<TD><%= resultSet.getString(14) %></TD>
+			<TD><%= resultSet.getString(15) %></td>
+			<TD><%= resultSet.getString(16) %></TD>
+			<TD><%= resultSet.getString(17) %></td>
+		</TR>
+		<% } %>
+	</TABLE>
+</div>	
+	<br><br>
+		<% 
+		Statement statement2 = connection.createStatement();
+    	ResultSet resultSet2 = statement.executeQuery("select * from Airport");	
+    %>
+<div>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Airport ID</TH>
+			<TH>Airport Abbr.</TH>
+			<TH>Airport Name</TH>
+		</TR>
+		<% while(resultSet2.next()){ %>
+		<TR>
+			<TD><%= resultSet2.getString(1) %></td>
+			<TD><%= resultSet2.getString(2) %></TD>
+			<TD><%= resultSet2.getString(3) %></TD>
+		</TR>
+		<% } %>
+	</TABLE>
+</div>	
+	<br><br>
+	
+		<% 
+		Statement statement3 = connection.createStatement();
+    	ResultSet resultSet3 = statement.executeQuery("select * from Aircraft");	
+    %>
+<div>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Aircraft ID</TH>
+			<TH>Aircraft Seats</TH>
+		</TR>
+		<% while(resultSet3.next()){ %>
+		<TR>
+			<TD><%= resultSet3.getString(1) %></td>
+			<TD><%= resultSet3.getString(2) %></TD>
+		</TR>
+		<% } %>
+	</TABLE>
+</div>	
+	<br><br>
+	
+	<form name="Add" onsubmit="return validateForm()" action="cRepExecuteA.jsp" method ="POST">
+       Please enter a unique flight#: <input type="text" name="fID"><br>
+       Please enter a unique type(One Way, Round Trip, or Flexible): <input type="text" name="type"><br>
+       Please enter a unique departure date(YYYY/MM/DD): <input type="text" name="dDate"><br>
+       Please enter a unique arrival date(YYYY/MM/DD): <input type="text" name="aDate"><br>
+       Please enter a unique departure time(HH:MM:SS): <input type="text" name="dTime"><br>
+       Please enter a unique arrival time(HH:MM:SS): <input type="text" name="aTime"><br>
+       Please enter a unique first class fare: <input type="text" name="fFare"><br>
+       Please enter a unique economy fare: <input type="text" name="eFare"><br>
+       Please enter a unique business fare: <input type="text" name="bFare"><br>
+       Please enter the number of stops for this flight: <input type="text" name="nos"><br>
+       Please enter the price of this flight: <input type="text" name="price"><br>
+       Please enter the departure airport for this flight: <input type="text" name="dAirport"><br>
+       Please enter the arrival airport for this flight: <input type="text" name="aAirport"><br>
+       Please enter the aircraft id for this flight: <input type="text" name="aID"><br>
+       <input type="submit" value="Add"> <br>
+    </form>
+
+	<br><br>
+	<a href='cRepHome.jsp'>Home Page</a>
+	<a href='../logout.jsp'>Log out</a>
+</body>
+</html>

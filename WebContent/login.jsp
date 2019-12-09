@@ -12,7 +12,7 @@
    
    <body>
    <h1 style = "text-align: center; text-decoration: underline;">Welcome to TravelLite!</h1>
-   <h2 style = "text-align: center"><em>"We'll get you where you want to go!</em></h2>
+   <h2 style = "text-align: center"><em>"We'll get you where you want to go!"</em></h2>
 
      <form action="checkLoginDetails.jsp" method="POST">
        Username: <input type="text" name="username"/> <br/> <br>

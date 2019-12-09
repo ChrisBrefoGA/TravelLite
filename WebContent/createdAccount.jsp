@@ -13,9 +13,8 @@ String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/T
     String pwd = request.getParameter("pwd1");//receives the users password from the signup form
     Class.forName("com.mysql.jdbc.Driver");//SQL connection stuff
     Connection con = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");//SQL connection stuff
-    Statement st = con.createStatement();//SQL connection stuff
     String insrt=("INSERT INTO users (userid, password, First_name, Last_name, account_id)"+"VALUES(?,?,?,?,?)");// THE Update string for the SQL Table Update
-    String insrt2 =("INSERT INTO Customer (user_name, account_num)"+"VALUES(?,?)");// THE Update string for the SQL Table Update
+    String insrt2 =("INSERT INTO Customer (userid, account_num)"+"VALUES(?,?)");// THE Update string for the SQL Table Update
     PreparedStatement ps = con.prepareStatement(insrt);//The string gets converted for SQL use
     PreparedStatement ps2 = con.prepareStatement(insrt2);//The string gets converted for SQL use		
     ps.setString(1,userid);//load the userid into the VALUES
@@ -25,7 +24,6 @@ String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/T
     Random rand = new Random();
     boolean insert = false;
     int n = 0;
-    while(!insert){
     	try{
     	 	n = rand.nextInt();
     		if(n < 0) n *= -1;
@@ -38,7 +36,6 @@ String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/T
     	}catch(Exception a){
     		System.out.println("Couldn't be inserted. accountID is a duplicate.");
     	}
-    }
     con.close();//close the connection
    	out.println("You have successfully created a new account.\nYour account id is:"+ n +".\n Please <a href='login.jsp'>login</a> to your new account");
 }

@@ -17,61 +17,61 @@ try{
 }
 %>
 
+<%
+String type = (String) session.getAttribute("type");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+function validateForm() {
+	  var id = document.forms["Edit"]["id"].value;
+	  if (id.trim() == "") {
+	    alert("ERROR: PLEASE ENTER THE ID YOU WOULD LIKE TO EDIT!!!");
+	    return false;
+	  }
+	}
+</script>
 <meta charset="ISO-8859-1">
-<title>Home</title>
+<title>Edit</title>
 </head>
 <body>
 	<h1>
 		Welcome
 		<%=session.getAttribute("user")%></h1>
-	<p>These are the current flights you filthy plebians</p>
-
-	<p>Flight Table</p>
-
+	<p>Please add the information for the <%=type%> you want to edit in the form below.</p>
 	<% 
 		String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
 		Connection connection = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");
 		Statement statement = connection.createStatement();
-    	ResultSet resultSet = statement.executeQuery("select * from Flight f order by f.price");	
+    	ResultSet resultSet = statement.executeQuery("select * from "+ type +"");	
     %>
-
+<div>
 	<TABLE BORDER="1">
 		<TR>
-			<TH>Flight #</TH>
-			<TH>Flight Type</TH>
-			<TH>Departure Date</TH>
-			<TH>Arrival Date</TH>
-			<TH>Departure Time</TH>
-			<TH>Arrival Time</TH>
-			<TH>Price</TH>
-			<TH>Available Seats</TH>
-			<TH>Number of Stops</TH>
-			<TH>Departure Airport</TH>
-			<TH>Arrival Airport</TH>
-			
+			<TH>Aircraft ID</TH>
+			<TH>Aircraft Seats</TH>
 		</TR>
 		<% while(resultSet.next()){ %>
 		<TR>
 			<TD><%= resultSet.getString(1) %></td>
 			<TD><%= resultSet.getString(2) %></TD>
-			<TD><%= resultSet.getString(3) %></td>
-			<TD><%= resultSet.getString(4) %></TD>
-			<TD><%= resultSet.getString(5) %></td>
-			<TD><%= resultSet.getString(6) %></TD>
-			<TD><%= resultSet.getString(13) %></TD>
-			<TD><%= resultSet.getString(10) %></td>
-			<TD><%= resultSet.getString(12) %></TD>
-			<TD><%= resultSet.getString(15) %></TD>
-			<TD><%= resultSet.getString(16) %></td>
 		</TR>
 		<% } %>
 	</TABLE>
-	
+</div>	
 	<br><br>
+	
+	<form name="Edit" onsubmit="return validateForm()" action="cRepExecuteE.jsp" method ="POST">
+       Please enter a unique aircraft id: <input type="text" name="id"><br><br>
+       If you do not have a new value please leave the space blank.<br>
+       Please enter the max number of seats on the aircraft: <input type="text" name="seats"><br>
+       <input type="submit" value="Edit"> <br>
+    </form>
 
-	<a href='logout.jsp'>Log out</a>
+	<br><br>
+	<a href='cRepHome.jsp'>Home Page</a>
+	<a href='../logout.jsp'>Log out</a>
 </body>
 </html>

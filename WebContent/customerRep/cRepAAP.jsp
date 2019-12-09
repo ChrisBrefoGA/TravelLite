@@ -17,66 +17,65 @@ try{
 }
 %>
 
+<%
+String type = (String) session.getAttribute("type");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
+<script>
+function validateForm() {
+	  var id = document.forms["Add"]["id"].value;
+	  var abbr = document.forms["Add"]["Abbr"].value;
+	  var name = document.forms["Add"]["Name"].value;
+	  if ((id.trim() == "" || abbr.trim() == "" || name.trim() == "") && abbr.length < 4) {
+	    alert("ERROR: PLEASE ENTER ALL OF THE VALUES!!!");
+	    return false;
+	  }
+	}
+</script>
 <meta charset="ISO-8859-1">
-<title>Home</title>
+<title>Add</title>
 </head>
 <body>
 	<h1>
 		Welcome
 		<%=session.getAttribute("user")%></h1>
-	<p>These are the current Customers bitch</p>
-
-	<p>Would you like to edit anything right now? (filler statement for
-		now)</p>
-
+	<p>Please add the information for this <%=type%> below in the form.</p>
 	<% 
 		String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
 		Connection connection = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");
 		Statement statement = connection.createStatement();
-    	ResultSet resultSet = statement.executeQuery("select * from Customer");	
+    	ResultSet resultSet = statement.executeQuery("select * from "+ type +"");	
     %>
-
+<div>
 	<TABLE BORDER="1">
 		<TR>
-			<TH>Customer Name</TH>
-			<TH>Customer ID</TH>
+			<TH>Airport ID</TH>
+			<TH>Airport Abbr.</TH>
+			<TH>Airport Name</TH>
 		</TR>
 		<% while(resultSet.next()){ %>
 		<TR>
 			<TD><%= resultSet.getString(1) %></td>
 			<TD><%= resultSet.getString(2) %></TD>
+			<TD><%= resultSet.getString(3) %></TD>
 		</TR>
 		<% } %>
 	</TABLE>
-	
+</div>	
 	<br><br>
 	
-	<form action="updateCustomerRep.jsp" method ="POST">
-       Enter a customer to be made a Customer Rep: <input type="text" name="cust">
-       <input type="submit" value="Make Customer Rep"> <br>
+<form name="Add" onsubmit="return validateForm()" action="cRepExecuteA.jsp" method ="POST">
+       Please enter a unique Airport id: <input type="text" name="id"><br>
+       Please enter a unique Airport Abbreviation: <input type="text" name="Abbr"><br>
+       Please enter a unique Airport Name: <input type="text" name="Name"><br>
+       <input type="submit" value="Add"> <br>
     </form>
-
+    
 	<br><br>
-	
-	<% resultSet = statement.executeQuery("select * from Customer_rep");  %>
-	
-	<TABLE BORDER="1">
-		<TR>
-			<TH>Customer Representative Name</TH>
-			<TH>Customer Representative ID</TH>
-		</TR>
-		<% while(resultSet.next()){ %>
-		<TR>
-			<TD><%= resultSet.getString(1) %></td>
-			<TD><%= resultSet.getString(2) %></TD>
-		</TR>
-		<% } %>
-	</TABLE>
-	<br>
-
+	<a href='cRepHome.jsp'>Home Page</a>
 	<a href='../logout.jsp'>Log out</a>
 </body>
 </html>
