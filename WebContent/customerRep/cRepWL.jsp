@@ -18,56 +18,44 @@ try{
 %>
 
 <%
-String type = (String) session.getAttribute("type");
+String flightNum = request.getParameter("Flight");
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-function validateForm() {
-	  var id = document.forms["Edit"]["id"].value;
-	  if (id.trim() == "") {
-	    alert("ERROR: PLEASE ENTER THE ID YOU WOULD LIKE TO EDIT!!!");
-	    return false;
-	  }
-	}
-</script>
 <meta charset="ISO-8859-1">
-<title>Edit</title>
+<title>Waiting List</title>
 </head>
 <body>
 <div>Welcome <%=session.getAttribute("user")%></div>
-	<p>Please add the information for the <%=type%> you want to edit in the form below.</p>
+	<p>Here is the waiting list for Flight <%=flightNum %>.</p>
 	<% 
+		ResultSet resultSet = null;
 		String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
 		Connection connection = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");
 		Statement statement = connection.createStatement();
-    	ResultSet resultSet = statement.executeQuery("select * from "+ type +"");	
+		Statement statement2 = connection.createStatement();
+    	resultSet = statement.executeQuery("select * from Waitinglist w where w.flight = '"+ flightNum +"'");	
+		ResultSet testSet = statement2.executeQuery("select * from Waitinglist w where w.flight = '"+ flightNum +"'");;
+    	if(testSet.next() == false){
+    		out.println("There is no waiting list for this flight, or the flight doesn't exist.");
+    		out.println("<a href='cRepHome.jsp'>Click Here</a> to try again.");
+    		return;
+    	}
     %>
 <div>
 	<TABLE BORDER="1">
 		<TR>
-			<TH>Aircraft ID</TH>
-			<TH>Aircraft Seats</TH>
+			<TH>Username's waiting for this flight</TH>
 		</TR>
 		<% while(resultSet.next()){ %>
 		<TR>
-			<TD><%= resultSet.getString(1) %></td>
 			<TD><%= resultSet.getString(2) %></TD>
 		</TR>
 		<% } %>
 	</TABLE>
 </div>	
-	<br><br>
-	
-	<form name="Edit" onsubmit="return validateForm()" action="cRepExecuteE.jsp" method ="POST">
-       Please enter a unique aircraft id: <input type="text" name="id"><br><br>
-       If you do not have a new value please leave the space blank.<br>
-       Please enter the max number of seats on the aircraft: <input type="text" name="seats"><br>
-       <input type="submit" value="Edit"> <br>
-    </form>
-
 	<br><br>
 	<a href='cRepHome.jsp'>Home Page</a>
 	<a href='../logout.jsp'>Log out</a>

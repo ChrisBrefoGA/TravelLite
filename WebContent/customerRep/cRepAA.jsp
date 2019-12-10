@@ -38,9 +38,7 @@ function validateForm() {
 <title>Add</title>
 </head>
 <body>
-	<h1>
-		Welcome
-		<%=session.getAttribute("user")%></h1>
+<div>Welcome <%=session.getAttribute("user")%></div>
 	<p>Please add the information for this <%=type%> below in the form.</p>
 	<% 
 		String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";

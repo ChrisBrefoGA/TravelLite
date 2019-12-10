@@ -18,9 +18,7 @@ try{
 <title>Home</title>
 </head>
 <body>
-	<h1>Welcome <%=session.getAttribute("user")%></h1>
-	<p>This is the customer rep page</p>
-	
+	<div>Welcome <%=session.getAttribute("user")%></div>	
 	<form>	
 		Make reservation for user: <input type = "text" name = "username">
 								   <button onclick="location.href='cRepFR.jsp'" type="button">Submit</button><br> <br>
@@ -31,7 +29,7 @@ try{
 		Waiting list for flight: <input type = "text" name = "flightnum">
 								 <button onclick="location.href='.jsp'" type="button">Submit</button> <br> <br>
 	</form>	
-	
+	<br>	
 	<form action = "cRepA.jsp" method = "POST">
 			<strong>Add a Flight, Aircraft, or Airport:</strong>
 			<select name = "Thing">
@@ -42,7 +40,7 @@ try{
 			<br><br> 
 			<button type="submit" value="Submit">Submit</button> <br> <br>
 	</form>
-	
+	<br>	
 	<form action = "cRepE.jsp" method = "POST">
 			<strong>Edit Flight, Aircraft, or Airport information:</strong>
 			<select name = "Thing">
@@ -53,7 +51,7 @@ try{
 			<br><br> 
 			<button type="submit" value="Submit">Submit</button> <br> <br>
 	</form>
-	
+	<br>
 	<form action = "cRepD.jsp" method = "POST">
 			<strong>Delete a Flight, Aircraft, or Airport:</strong>
 			<select name="Thing">
@@ -64,7 +62,12 @@ try{
 			<br><br> 
 			<button type="submit" value="Submit">Submit</button> <br> <br>
 	</form>
-		<br><br> 
+		<br> 
+		<form action = "cRepWL.jsp" method = "POST">	
+		Please enter the flight you would like to see the waiting list for <input type = "text" name = "Flight">
+								   <button type="submit" value ="Submit">Submit</button><br> <br>
+	</form>	
+		<br>		
 		<button onclick="location.href='../logout.jsp'" type="button">Logout</button> <br> <br>
 	
 </body>
