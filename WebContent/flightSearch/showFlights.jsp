@@ -17,15 +17,12 @@
 
 	<% 
 		String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
-/*		Connection connection = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");
-		Statement statement = connection.createStatement();*/
 		String from = request.getParameter("FROM");
 		String to = request.getParameter("TO");
 		String d_date = request.getParameter("DEPARTURE DATE");
 		String a_date = request.getParameter("RETURN DATE");
 		String trip = (String) session.getAttribute("type");
 		String type = request.getParameter("type");
-		System.out.println(from + " " + to + " " + d_date + " " + a_date + " " + trip + " " + type);
 		
 		Class.forName("com.mysql.jdbc.Driver");//SQL connection stuff
 		Connection con = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");//SQL connection stuff	
@@ -91,6 +88,7 @@
 			<TH>Number of Stops</TH>
 			<TH>Departure Airport</TH>
 			<TH>Arrival Airport</TH>
+			<TH>Airline</TH>
 			
 		</TR>
 		<% while(rs.next()){ %>
@@ -110,8 +108,41 @@
 		<% } %>
 	</TABLE>
 	
-	<button type="button">Choose a Flight</button>
+	<br>
 	
+	<form action = "flightSearchResults.jsp" method = "POST">		
+		Sort by:
+			<input type="radio" name="sort" value="price" checked> Price
+    		<input type="radio" name="sort" value="depart_time"> Departure time
+			<input type="radio" name="sort" value="arrive_time"> Arrival time<br> <br>
+		
+		Filter by: <br> <br>
+		
+		Price: 
+		<input type="text" name="flight_price" value = "<500">  
+ 		
+ 		<br> <br>
+ 		
+ 		Number of stops: 
+		<input type="text" name="number_stops" value = 0>
+ 		
+ 		<br> <br>
+ 		
+ 		Airline: 
+ 		<select name = "airline_name">
+  			<option value="1">Spirit</option>
+  			<option value="2">Frontier</option>
+  			<option value="3">United Airlines</option>
+  			<option value="4">Delta</option>
+  			<option value="5">American Airlines</option>
+  			<option value="6">Alaska Airlines</option>
+		</select>
+		
+		<br> <br>	
+		
+		<button type = "submit"> Filter Flights </button>		
+		</form>
+			
 	<% }else if(trip.equals("Round Trip") || trip.equals("Flexible")){ %>
 		
 		<%if(trip.equals("Round Trip")){ %>
@@ -145,7 +176,7 @@
 			<TD><%= rs.getString(4) %></TD>
 			<TD><%= rs.getString(5) %></td>
 			<TD><%= rs.getString(6) %></TD>
-			<TD><%= rs.getString(7) %></TD>
+			<TD><%= rs.getString(14) %></TD>
 			<TD><%= rs.getString(8) %></td>
 			<TD><%= rs.getString(9) %></td>
 			<TD><%= rs.getString(10) %></td>
@@ -187,14 +218,10 @@
 		</TR>
 		<% } %>
 	</TABLE>
-	
-	<button type="button">Choose a Flight</button>
 
 	<% } %>
-	
-	
+		
 	<br><br>
-	
-	
+		
 </body>
 </html>
