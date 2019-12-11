@@ -27,7 +27,6 @@ try{
 	<h1>
 		Welcome
 		<%=session.getAttribute("user")%></h1>
-	<p>These are the current Customers.</p>
 
 	<p>Would you like to edit anything right now? (filler statement for
 		now)</p>
@@ -59,6 +58,7 @@ try{
     	ResultSet resultSet = statement.executeQuery("select u.*, c.revenue from Customer c, users u where c.userid = u.userid");	
     %>
 
+	<h3>Current Customers:</h3>
 	<TABLE BORDER="1">
 		<TR>
 			<TH>Customer Username</TH>
@@ -84,6 +84,7 @@ try{
 	
 	<% resultSet = statement.executeQuery("select users.* from Customer_rep, users where Customer_rep.userid = users.userid");  %>
 	
+	<h3>Current Customer Reps:</h3>
 	<TABLE BORDER="1">
 		<TR>
 			<TH>CR Username</TH>

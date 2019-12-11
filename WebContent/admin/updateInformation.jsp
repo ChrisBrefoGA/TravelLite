@@ -8,7 +8,7 @@ try{
     String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
     String edited_user = (String)session.getAttribute("edited_user");
     System.out.println(edited_user);
-    String user = request.getParameter("user");
+    String users = request.getParameter("user");
     String pass = request.getParameter("pass");
     String first = request.getParameter("first");
     String last = request.getParameter("last");
@@ -24,7 +24,7 @@ try{
     if (revenueS.matches(".*\\d.*")) {
         revenue = new Integer(revenueS);
     }
-    System.out.println("username: " + user);
+    System.out.println("username: " + users);
     System.out.println("password: " + pass);
     System.out.println("firstname: " + first);
     System.out.println("lastname: " + last);
@@ -37,27 +37,29 @@ try{
     //update all given information
 
     //edit username
-    if (!user.equals(null) || user != "") {
+    System.out.println(users=="");
+    if (users != "") {
         System.out.println("editing username");
-        st.executeUpdate("UPDATE user SET userid = '" + user  + "'" + " where userid = '" + edited_user + "'");
-        st.executeUpdate("UPDATE Customer SET userid = '" + user  + "'" + " where userid = '" + edited_user + "'");
-        st.executeUpdate("UPDATE Customer_rep SET userid = '" + user  + "'" + " where userid = '" + edited_user + "'");
+        st.executeUpdate("UPDATE users SET userid = '" + users  + "'" + " where userid = '" + edited_user + "'");
+        st.executeUpdate("UPDATE Customer SET userid = '" + users  + "'" + " where userid = '" + edited_user + "'");
+        st.executeUpdate("UPDATE Customer_rep SET userid = '" + users  + "'" + " where userid = '" + edited_user + "'");
+        edited_user = users;
     }
-    if (pass != null) {
+    if (pass != "") {
         System.out.println("editing password");
-        st.executeUpdate("UPDATE user SET password = '" + pass  + "'" + " where userid = '" + edited_user + "'");
+        st.executeUpdate("UPDATE users SET password = '" + pass  + "'" + " where userid = '" + edited_user + "'");
     }
-    if (first != null) {
-        System.out.println("editing frist name");
-        st.executeUpdate("UPDATE user SET First_name = '" + first  + "'" + " where userid = '" + edited_user + "'");
+    if (first != "") {
+        System.out.println("editing first name");
+        st.executeUpdate("UPDATE users SET First_name = '" + first  + "'" + " where userid = '" + edited_user + "'");
     }
-    if (last != null) {
+    if (last != "") {
         System.out.println("editing last name");
-        st.executeUpdate("UPDATE user SET Last_name = '" + last  + "'" + " where userid = '" + edited_user + "'");
+        st.executeUpdate("UPDATE users SET Last_name = '" + last  + "'" + " where userid = '" + edited_user + "'");
     }
     if (acctnum > 0) {
         System.out.println("editing acctnum");
-        st.executeUpdate("UPDATE user SET account_id = '" + acctnum  + "'" + " where userid = '" + edited_user + "'");
+        st.executeUpdate("UPDATE users SET account_id = '" + acctnum  + "'" + " where userid = '" + edited_user + "'");
         st.executeUpdate("UPDATE Customer SET account_num = '" + acctnum  + "'" + " where userid = '" + edited_user + "'");
         st.executeUpdate("UPDATE Customer_rep SET customer_rep_id = '" + acctnum  + "'" + " where userid = '" + edited_user + "'");
     }
@@ -71,10 +73,10 @@ try{
 catch(SQLException a) {
     System.out.println(a);
     System.out.println("Error in sql statements.");	
-}/*
+}
 catch(Exception a){
 	System.out.println(a);
 	System.out.println("Error in general.");	
-}*/
+}
 response.sendRedirect("adminHome.jsp");
 %>
