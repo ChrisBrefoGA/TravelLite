@@ -36,37 +36,37 @@
 		if(trip.equals("One Way")){
 			
 			if(type.equals("fare_economy")){
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_economy, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
+				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_economy, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
 			}else if(type.equals("fare_first")){
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_first, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
+				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time,  price, fare_first, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
 			}else{
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_business, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
+				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_business, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
 			}
 			
 		}else if(trip.equals("Round Trip")){
 			
 			if(type.equals("fare_economy")){
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_economy, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_economy, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
+				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_economy, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
+				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_economy, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
 			}else if(type.equals("fare_first")){
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_first, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_first, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
+				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_first, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
+				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_first, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
 			}else{
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_business, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_business, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
+				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_business, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
+				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_business, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
 			}
 			
 		}else if(trip.equals("Flexible")){
 			
 			if(type.equals("fare_economy")){
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_economy, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_economy, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
+				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_economy, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
+				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_economy, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
 			}else if(type.equals("fare_first")){
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_first, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_first, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
+				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_first, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
+				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_first, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
 			}else{
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_business, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, fare_business, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
+				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_business, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
+				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_business, booking_fee, available_seats, num_stops, departure_airport, arrival_airport from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
 			}
 		}
     %>
@@ -83,7 +83,9 @@
 			<TH>Arrival Date</TH>
 			<TH>Departure Time</TH>
 			<TH>Arrival Time</TH>
-			<TH>Price</TH>
+			<TH>Base Price</TH>
+			<TH>Class Fee</TH>
+			<TH>Booking Fee</TH>
 			<TH>Available Seats</TH>
 			<TH>Number of Stops</TH>
 			<TH>Departure Airport</TH>
@@ -100,10 +102,13 @@
 			<TD><%= rs.getString(5) %></td>
 			<TD><%= rs.getString(6) %></TD>
 			<TD><%= rs.getString(7) %></TD>
-			<TD><%= rs.getString(8) %></td>
+			<TD><%= rs.getString(8) %></TD>
 			<TD><%= rs.getString(9) %></td>
 			<TD><%= rs.getString(10) %></td>
-			<TD><%= rs.getString(11) %></TD>
+			<TD><%= rs.getString(11) %></td>
+			<TD><%= rs.getString(12) %></td>
+			<TD><%= rs.getString(13) %></TD>
+			
 		</TR>
 		<% } %>
 	</TABLE>
