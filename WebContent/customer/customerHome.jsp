@@ -23,7 +23,7 @@ try{
 
 	<h1> Welcome <%=session.getAttribute("user")%> </h1>
 
-	<form action="../flightClassMid.jsp" method="POST">
+	<form action="../flightSearch/flightClassMid.jsp" method="POST">
 
 		<script type="text/javascript">
 		function isNumberKey(evt) {
@@ -47,8 +47,7 @@ try{
 				<option value="One Way">One-Way</option>
 				<option value="Round Trip">Two-Way</option>
 				<option value="Flexible">Flexible</option>
-			</select> 
-
+			</select>
 		<button type="submit" value="continue">Continue</button>
 
 	</form>

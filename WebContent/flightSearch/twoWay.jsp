@@ -64,7 +64,7 @@ String trip = (String) session.getAttribute("type");
 			<option value="fare_first">fare_first</option>
 		</select> 
 		<br><br> 
-		<button onclick="location.href='showFlights.jsp'" type="Submit">Search</button>
+		<button type="Submit">Search</button>
 		<button onclick="location.href='logout.jsp'" type="button">Logout</button>
 
 	</form>
