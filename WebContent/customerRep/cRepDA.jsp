@@ -49,12 +49,10 @@ function validateForm() {
 	<TABLE BORDER="1">
 		<TR>
 			<TH>Aircraft ID</TH>
-			<TH>Aircraft Seats</TH>
 		</TR>
 		<% while(resultSet.next()){ %>
 		<TR>
 			<TD><%= resultSet.getString(1) %></td>
-			<TD><%= resultSet.getString(2) %></TD>
 		</TR>
 		<% } %>
 	</TABLE>

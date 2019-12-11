@@ -18,7 +18,7 @@ String type = request.getParameter("Thing");
 session.setAttribute("type",type);
 %>
 <% 
-if(type.equals("Flight")){//For Flights
+if(type.equals("Flights")){//For Flights
   response.sendRedirect("cRepEF.jsp");
 }
 else if(type.equals("Aircraft")){//For Aircrafts

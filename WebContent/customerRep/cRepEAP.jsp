@@ -49,25 +49,19 @@ function validateForm() {
 	<TABLE BORDER="1">
 		<TR>
 			<TH>Airport ID</TH>
-			<TH>Airport Abbr.</TH>
-			<TH>Airport Name</TH>
 		</TR>
 		<% while(resultSet.next()){ %>
 		<TR>
 			<TD><%= resultSet.getString(1) %></td>
-			<TD><%= resultSet.getString(2) %></TD>
-			<TD><%= resultSet.getString(3) %></TD>
 		</TR>
 		<% } %>
 	</TABLE>
 </div>	
 	<br><br>
-	
+
 <form name="Edit" onsubmit="return validateForm()" action="cRepExecuteE.jsp" method ="POST">
-       Please enter a unique Airport id: <input type="text" name="id"><br><br>
-       If you do not have a new value please leave the space blank.<br>
-       Please enter a unique Airport Abbreviation: <input type="text" name="Abbr"><br>
-       Please enter a unique Airport Name: <input type="text" name="Name"><br>
+       Please enter the old Airport id: <input type="text" name="id"><br><br>
+       Please enter the new Airport id: <input type="text" name="Nid"><br><br>
        <input type="submit" value="Edit"> <br>
     </form>
     

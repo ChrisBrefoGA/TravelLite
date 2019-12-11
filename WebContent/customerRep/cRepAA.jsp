@@ -27,8 +27,8 @@ String type = (String) session.getAttribute("type");
 <script>
 function validateForm() {
 	  var id = document.forms["Add"]["id"].value;
-	  var seat = document.forms["Add"]["seats"].value;
-	  if (id.trim() == "" || seat.trim() == "") {
+	  var airlineID = document.forms["Add"]["airlineID"].value;
+	  if (id.trim() == "" || airlineID.trim() == "") {
 	    alert("ERROR: PLEASE ENTER ALL OF THE VALUES!!!");
 	    return false;
 	  }
@@ -50,12 +50,48 @@ function validateForm() {
 	<TABLE BORDER="1">
 		<TR>
 			<TH>Aircraft ID</TH>
-			<TH>Aircraft Seats</TH>
 		</TR>
 		<% while(resultSet.next()){ %>
 		<TR>
 			<TD><%= resultSet.getString(1) %></td>
-			<TD><%= resultSet.getString(2) %></TD>
+		</TR>
+		<% } %>
+	</TABLE>
+</div>	
+	<br><br>
+	
+		<% 
+    	ResultSet resultSet2 = statement.executeQuery("select * from Airlines");	
+    %>
+<div>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Airline ID</TH>
+			<TH>Airline Name</TH>
+		</TR>
+		<% while(resultSet2.next()){ %>
+		<TR>
+			<TD><%= resultSet2.getString(1) %></td>
+			<TD><%= resultSet2.getString(2) %></TD>
+		</TR>
+		<% } %>
+	</TABLE>
+</div>	
+	<br><br>
+	
+			<% 
+    	ResultSet resultSet3 = statement.executeQuery("select * from Owns");	
+    %>
+<div>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Airline ID</TH>
+			<TH>Aircraft ID</TH>
+		</TR>
+		<% while(resultSet3.next()){ %>
+		<TR>
+			<TD><%= resultSet3.getString(1) %></td>
+			<TD><%= resultSet3.getString(2) %></TD>
 		</TR>
 		<% } %>
 	</TABLE>
@@ -64,7 +100,7 @@ function validateForm() {
 	
 	<form name="Add" onsubmit="return validateForm()" action="cRepExecuteA.jsp" method ="POST">
        Please enter a unique aircraft id: <input type="text" name="id"><br>
-       Please enter the max number of seats on the aircraft: <input type="text" name="seats"><br>
+       Please enter the Airline ID it's owned by:(Ex. AA) <input type="text" name="airlineID"><br>
        <input type="submit" value="Add"> <br>
     </form>
 

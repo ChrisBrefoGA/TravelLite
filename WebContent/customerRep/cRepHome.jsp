@@ -25,15 +25,12 @@ try{
 		
 		Edit reservation for user: <input type = "text" name = "username">
 								   <button onclick="location.href='.jsp'" type="button">Submit</button> <br> <br>
-		
-		Waiting list for flight: <input type = "text" name = "flightnum">
-								 <button onclick="location.href='.jsp'" type="button">Submit</button> <br> <br>
 	</form>	
 	<br>	
 	<form action = "cRepA.jsp" method = "POST">
 			<strong>Add a Flight, Aircraft, or Airport:</strong>
 			<select name = "Thing">
-				<option value="Flight">Flight</option>
+				<option value="Flights">Flight</option>
 				<option value="Aircraft">Aircraft</option>
 				<option value="Airport">Airport</option>
 			</select> 
@@ -42,9 +39,9 @@ try{
 	</form>
 	<br>	
 	<form action = "cRepE.jsp" method = "POST">
-			<strong>Edit Flight, Aircraft, or Airport information:</strong>
+			<strong>Edit a Flight, Aircraft, or Airport information:</strong>
 			<select name = "Thing">
-				<option value="Flight">Flight</option>
+				<option value="Flights">Flight</option>
 				<option value="Aircraft">Aircraft</option>
 				<option value="Airport">Airport</option>
 			</select> 
@@ -55,7 +52,7 @@ try{
 	<form action = "cRepD.jsp" method = "POST">
 			<strong>Delete a Flight, Aircraft, or Airport:</strong>
 			<select name="Thing">
-				<option value="Flight">Flight</option>
+				<option value="Flights">Flight</option>
 				<option value="Aircraft">Aircraft</option>
 				<option value="Airport">Airport</option>
 			</select> 

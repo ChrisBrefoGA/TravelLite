@@ -45,25 +45,25 @@ function validateForm() {
     	ResultSet resultSet = statement.executeQuery("select * from "+ type +"");	
     %>
 <div>
+<strong>FLIGHTS</strong>
 	<TABLE BORDER="1">
 		<TR>
 			<TH>Flight#</TH>
 			<TH>Type</TH>
+			<TH>Trip Type</TH>
+			<TH>Departure</TH>
+			<TH>Destination</TH>
 			<TH>Departure Date</TH>
 			<TH>Arrival Date</TH>
 			<TH>Departure Time</TH>
-			<TH>Arrival Time</TH>
+			<TH>Arrival /time</TH>
 			<TH>Fare First</TH>
-			<TH>Fare Economy</TH>
 			<TH>Fare Business</TH>
-			<TH>Available Seats</TH>
-			<TH>Is Full</TH> <!-- default is always false -->
+			<TH>Fare Economy</TH>
+			<TH>Airline</TH>
+			<TH>Aircraft</TH>
 			<TH>Number of Stops</TH>
-			<TH>Price</TH>
-			<TH>Booking fee</TH><!-- static value -->
-			<TH>Departure Airport</TH>
-			<TH>Arrival Airport</TH>
-			<TH>Aircraft ID</TH>
+
 		</TR>
 		<% while(resultSet.next()){ %>
 		<TR>
@@ -79,17 +79,14 @@ function validateForm() {
 			<TD><%= resultSet.getString(10) %></TD>
 			<TD><%= resultSet.getString(11) %></td>
 			<TD><%= resultSet.getString(12) %></TD>
-		    <TD><%= resultSet.getString(13) %></td>
+			<TD><%= resultSet.getString(13) %></td>
 			<TD><%= resultSet.getString(14) %></TD>
-			<TD><%= resultSet.getString(15) %></td>
-			<TD><%= resultSet.getString(16) %></TD>
-			<TD><%= resultSet.getString(17) %></td>
+			<TD><%= resultSet.getString(15) %></TD>
 		</TR>
 		<% } %>
 	</TABLE>
 </div>	
 	<br><br>
-	
 	<form name="Delete" onsubmit="return validateForm()" action="cRepExecuteD.jsp" method ="POST">
        Please enter a flight#: <input type="text" name="fID"><br>
        <input type="submit" value="Delete"> <br>

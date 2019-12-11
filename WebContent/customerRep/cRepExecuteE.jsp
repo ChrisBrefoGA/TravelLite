@@ -34,95 +34,88 @@ catch(Exception a){
 	out.println("Couldn't setup a connection!!");
     response.sendRedirect("cRepHome.jsp");	
 }
-if(type.equals("Flight")){
+if(type.equals("Flights")){
 	try{
 		String FN = request.getParameter("fID");	
 		Statement statement = con.createStatement();
-		ResultSet resultSet3 = statement.executeQuery("select * from Flight where flight_number ='"+FN+"'");	
-		resultSet3.next();
-	String tYP = request.getParameter("type");
-	String dDate = request.getParameter("dDate");		
-	String aDate = request.getParameter("aDate");			
-	String dTime = request.getParameter("dTime");			
-	String aTime = request.getParameter("aTime");			
-	String fFirst = request.getParameter("fFare");
-	String eFirst = request.getParameter("eFare");
-	String bFirst = request.getParameter("bFare");
-	String aSeats = request.getParameter("aSeats");
-	String isFull = request.getParameter("isFull");
-	String nos = request.getParameter("nos");
-	String dAirport = request.getParameter("dAirport");	
-	String price = request.getParameter("price");
-	String bFee = request.getParameter("bFee");
-	String aAirport = request.getParameter("aAirport");	
-	String AID = request.getParameter("aID");	
-	
+		ResultSet resultSet3 = statement.executeQuery("select * from Flights where flight_num ='"+FN+"'");	
+		resultSet3.next();	
+		String tYP = request.getParameter("DItype");
+		String tType = request.getParameter("tType");
+		String dAirport = request.getParameter("dAirport");	
+		String aAirport = request.getParameter("aAirport");
+		String dDate = request.getParameter("dDate");	
+		String aDate = request.getParameter("aDate");	
+		String dTime = request.getParameter("dTime");
+		String aTime = request.getParameter("aTime");	
+		String fFirst = request.getParameter("fFare");
+		String bFirst = request.getParameter("bFare");
+		String eFirst = request.getParameter("eFare");	
+		String alID = request.getParameter("alID");	
+		String AID = request.getParameter("aID");
+		String nos = request.getParameter("nos");
+		String DOW = request.getParameter("DOW");
 	if(tYP.trim().isEmpty()){
 		tYP = resultSet3.getString(2);
 	}
-	if(dDate.trim().isEmpty()){
-		dDate = resultSet3.getString(3);
-	}
-	if(aDate.trim().isEmpty()){
-		aDate = resultSet3.getString(4);
-	}
-	if(dTime.trim().isEmpty()){
-		dTime = resultSet3.getString(5);
-	}
-	if(aTime.trim().isEmpty()){
-		aTime = resultSet3.getString(6);
-	}
-	if(fFirst.trim().isEmpty()){
-		fFirst = resultSet3.getString(7);
-	}
-	if(eFirst.trim().isEmpty()){
-		eFirst = resultSet3.getString(8);
-	}
-	if(bFirst.trim().isEmpty()){
-		bFirst = resultSet3.getString(9);
-	}
-	if(aSeats.trim().isEmpty()){
-		aSeats = resultSet3.getString(10);
-	}
-	if(isFull.trim().isEmpty()){
-		isFull = resultSet3.getString(11);
-	}
-	if(nos.trim().isEmpty()){
-		nos = resultSet3.getString(12);
-	}
-	if(price.trim().isEmpty()){
-		price = resultSet3.getString(13);
-	}
-	if(bFee.trim().isEmpty()){
-		bFee = resultSet3.getString(14);
+	if(tType.trim().isEmpty()){
+		tType = resultSet3.getString(3);
 	}
 	if(dAirport.trim().isEmpty()){
-		dAirport = resultSet3.getString(15);
+		dAirport = resultSet3.getString(4);
 	}
 	if(aAirport.trim().isEmpty()){
-		aAirport = resultSet3.getString(16);
+		aAirport = resultSet3.getString(5);
+	}
+	if(dDate.trim().isEmpty()){
+		dDate = resultSet3.getString(6);
+	}
+	if(aDate.trim().isEmpty()){
+		aDate = resultSet3.getString(7);
+	}
+	if(dTime.trim().isEmpty()){
+		dTime = resultSet3.getString(8);
+	}
+	if(aTime.trim().isEmpty()){
+		aTime = resultSet3.getString(9);
+	}
+	if(fFirst.trim().isEmpty()){
+		fFirst = resultSet3.getString(10);
+	}
+	if(bFirst.trim().isEmpty()){
+		bFirst = resultSet3.getString(11);
+	}
+	if(eFirst.trim().isEmpty()){
+		eFirst = resultSet3.getString(12);
+	}
+	if(alID.trim().isEmpty()){
+		alID = resultSet3.getString(13);
 	}
 	if(AID.trim().isEmpty()){
-		AID = resultSet3.getString(17);
+		AID = resultSet3.getString(14);
 	}
-	
-	statement.executeUpdate("UPDATE Flight SET  flight_number ='"+ FN +"'   where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET  type = '"+ tYP +"' where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET  depart_date ='"+ dDate +"'  where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET  arrival_date = '"+ aDate +"' where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET  depart_time ='"+ dTime +"'  where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET  arrive_time = '"+ aTime +"' where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET  fare_first ='"+ fFirst +"'  where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET  fare_economy = '"+ eFirst +"' where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET  fare_business ='"+ bFirst +"'  where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET  available_seats = '"+ aSeats +"' where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET  is_full ='"+ isFull +"'  where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET  num_stops = '"+ nos +"' where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET  price ='"+ price +"'  where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET  booking_fee = '"+ bFee +"' where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET departure_airport ='"+ dAirport +"'  where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET  arrival_airport = '"+ aAirport +"' where flight_number = '"+ FN +"'");
-	statement.executeUpdate("UPDATE Flight SET aircraft_id ='"+ AID +"'  where flight_number = '"+ FN +"'");
+	if(nos.trim().isEmpty()){
+		nos = resultSet3.getString(15);
+	}
+	statement.executeUpdate("UPDATE Flights SET  flight_num ='"+ FN +"'   where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE Flights SET  type = '"+ tYP +"' where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE Flights SET  tripType = '"+ tYP +"' where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE Flights SET  Departure ='"+ dAirport +"'  where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE Flights SET  Destination = '"+ aAirport +"' where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE Flights SET  depart_day ='"+ dDate +"'  where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE Flights SET  arrival_day = '"+ aDate +"' where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE Flights SET  depart_time ='"+ dTime +"'  where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE Flights SET  arrival_time = '"+ aTime +"' where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE Flights SET  fare_first ='"+ fFirst +"'  where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE Flights SET  fare_business ='"+ bFirst +"'  where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE Flights SET  fare_economy = '"+ eFirst +"' where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE Flights SET airline_id ='"+ alID +"'  where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE Flights SET aircraft_id ='"+ AID +"'  where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE Flights SET  num_stops = '"+ nos +"' where flight_num = '"+ FN +"'");
+	statement.executeUpdate("UPDATE flights_on SET day_number = '"+ DOW +"' where flight_number ='" + FN +"'");
+	statement.executeUpdate("UPDATE flights_on SET  airline_id = '"+ alID +"'where flight_number='" + FN +"'");
+	statement.executeUpdate("UPDATE Uses SET airline_id = '"+ alID +"'where flight_number= '"+ FN +"'");
+	statement.executeUpdate("UPDATE Uses SET aircraft_id = '"+ AID +"' where flight_number= '"+ FN +"'");
 	out.println("We completed your edit inquiry!!<a href='cRepHome.jsp'>Click Here</a> to go back to the home page");
 	out.println("<a href='cRepEF.jsp'>Click Here</a> to edit another one.");
 	}catch(SQLException a){
@@ -136,17 +129,11 @@ else if(type.equals("Airport")){
 	Statement statement = con.createStatement();
 	ResultSet resultSet3 = statement.executeQuery("select * from Airport where airport_id ='"+AID+"'");	
 	resultSet3.next();
-	String abbr = request.getParameter("Abbr");
-	String name = request.getParameter("Name");
-	if(abbr.trim().isEmpty()){
-		abbr = resultSet3.getString(2);
+	String Nid = request.getParameter("Nid");
+	if(Nid.trim().isEmpty()){
+		Nid = resultSet3.getString(1);
 	}
-	if(name.trim().isEmpty()){
-		name = resultSet3.getString(3);
-	}
-	statement.executeUpdate("UPDATE Airport SET airport_id ='"+ AID +"'  where airport_id = '"+ AID +"'");
-	statement.executeUpdate("UPDATE Airport SET  abbreviation = '"+ abbr +"' where airport_id = '"+ AID +"'");
-	statement.executeUpdate("UPDATE Airport SET name ='"+ name +"'  where airport_id = '"+ AID +"'");
+	statement.executeUpdate("UPDATE Airport SET airport_id ='"+ Nid +"'  where airport_id = '"+ AID +"'");
 	out.println("We completed your edit inquiry!!<a href='cRepHome.jsp'>Click Here</a> to go back to the home page");
 	out.println("<a href='cRepEAP.jsp'>Click Here</a> to edit another one.");
 	}catch(SQLException a){
@@ -160,12 +147,11 @@ else if(type.equals("Aircraft")){
 	Statement statement = con.createStatement();
 	ResultSet resultSet3 = statement.executeQuery("select * from Aircraft where aircraft_id ='"+ AID +"'");	
 	resultSet3.next();
-	String seat = request.getParameter("seats");
-	if(seat.isEmpty()){
-		seat = resultSet3.getString(2);
+	String Nid = request.getParameter("Nid");
+	if(Nid.trim().isEmpty()){
+		Nid = resultSet3.getString(1);
 	}
-	statement.executeUpdate("UPDATE Aircraft SET aircraft_id ='"+ AID +"'  where aircraft_id = '"+ AID +"'");
-	statement.executeUpdate("UPDATE Aircraft SET  Max_seats = '"+ seat +"' where aircraft_id = '"+ AID +"'");
+	statement.executeUpdate("UPDATE Aircraft SET aircraft_id ='"+ Nid +"'  where aircraft_id = '"+ AID +"'");
 	out.println("We completed your edit inquiry!!<a href='cRepHome.jsp'>Click Here</a> to go back to the home page\n");
 	out.println("<a href='cRepEA.jsp'>Click Here</a> to edit another one.\n");
 	}catch(SQLException a){
