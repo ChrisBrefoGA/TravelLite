@@ -13,6 +13,10 @@ try{
 }
 %>
 
+<%
+String trip = (String) session.getAttribute("type");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +27,7 @@ try{
 
 	<h1> Welcome <%=session.getAttribute("user")%> </h1>
 
-	<form action="../flightClassMid.jsp" method="POST">
+	<form action="showFlights.jsp" method="POST">
 
 		<script type="text/javascript">
 		function isNumberKey(evt) {
@@ -42,14 +46,24 @@ try{
      	</script>
 
 		<h2>Search for Flights in TravelLite!</h2>
+		
+		<h3>One Way Flight</h3>
+									   
+		<strong>From:</strong> <input type="text" name="FROM"/> 
+		<strong>To:</strong> <input type="text" name="TO"/> <br /> <br>
 
-		<strong>Flight Class:</strong> <select name = "flight-class">
-				<option value="One Way">One-Way</option>
-				<option value="Round Trip">Two-Way</option>
-				<option value="Flexible">Flexible</option>
-			</select> 
+		<strong>Number of Passengers:</strong> <input name="someid" type="number"/> <br><br> 
+		<strong>Departure Date:</strong> <input type="date" name="DEPARTURE DATE" />
 
-		<button type="submit" value="continue">Continue</button>
+		<strong>Flight Type:</strong>
+		<select name = "type">
+			<option value="fare_economy">fare_economy</option>
+			<option value="fare_business">fare_business</option>
+			<option value="fare_first">fare_first</option>
+		</select> 
+		<br><br> 
+		<button type="Submit">Search</button>
+		<button onclick="location.href='../logout.jsp'" type="button">Logout</button>
 
 	</form>
 </body>
