@@ -34,12 +34,12 @@ catch(Exception a){
 	out.println("Couldn't setup a connection!!");
     response.sendRedirect("cRepHome.jsp");	
 }
-if(type.equals("Flight")){
+if(type.equals("Flights")){
 	try{
 	String FN = request.getParameter("fID");
 	System.out.println(FN);
 	Statement statement = con.createStatement();
-	statement.executeUpdate("DELETE FROM Flight where flight_number ='"+ FN +"'");
+	statement.executeUpdate("DELETE FROM Flights where flight_num ='"+ FN +"'");
 	out.println("We completed your delete inquiry!!<a href='cRepHome.jsp'>Click Here</a> to go back to the home page");
 	out.println("<a href='cRepDF.jsp'>Click Here</a> to add another one.");
 	}catch(SQLException a){

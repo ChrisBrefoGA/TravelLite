@@ -38,32 +38,32 @@ function validateForm() {
 <body>
 <div>Welcome <%=session.getAttribute("user")%></div>
 	<p>Please add the information for the <%=type%> you want to edit in the form below.</p>
-	<% 
+		<% 
 		String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
 		Connection connection = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");
 		Statement statement = connection.createStatement();
     	ResultSet resultSet = statement.executeQuery("select * from "+ type +"");	
     %>
 <div>
+<strong>FLIGHTS</strong>
 	<TABLE BORDER="1">
 		<TR>
 			<TH>Flight#</TH>
 			<TH>Type</TH>
+			<TH>Trip Type</TH>
+			<TH>Departure</TH>
+			<TH>Destination</TH>
 			<TH>Departure Date</TH>
 			<TH>Arrival Date</TH>
 			<TH>Departure Time</TH>
-			<TH>Arrival Time</TH>
+			<TH>Arrival /time</TH>
 			<TH>Fare First</TH>
-			<TH>Fare Economy</TH>
 			<TH>Fare Business</TH>
-			<TH>Available Seats</TH>
-			<TH>Is Full</TH>
+			<TH>Fare Economy</TH>
+			<TH>Airline</TH>
+			<TH>Aircraft</TH>
 			<TH>Number of Stops</TH>
-			<TH>Price</TH>
-			<TH>Booking fee</TH>
-			<TH>Departure Airport</TH>
-			<TH>Arrival Airport</TH>
-			<TH>Aircraft ID</TH>
+
 		</TR>
 		<% while(resultSet.next()){ %>
 		<TR>
@@ -79,52 +79,132 @@ function validateForm() {
 			<TD><%= resultSet.getString(10) %></TD>
 			<TD><%= resultSet.getString(11) %></td>
 			<TD><%= resultSet.getString(12) %></TD>
-		    <TD><%= resultSet.getString(13) %></td>
+			<TD><%= resultSet.getString(13) %></td>
 			<TD><%= resultSet.getString(14) %></TD>
-			<TD><%= resultSet.getString(15) %></td>
-			<TD><%= resultSet.getString(16) %></TD>
-			<TD><%= resultSet.getString(17) %></td>
+			<TD><%= resultSet.getString(15) %></TD>
 		</TR>
 		<% } %>
 	</TABLE>
 </div>	
 	<br><br>
-		<% 
-		Statement statement2 = connection.createStatement();
-    	ResultSet resultSet2 = statement.executeQuery("select * from Airport");	
-    %>
+		<%     	ResultSet resultSet2 = statement.executeQuery("select * from Airport");	    %>
 <div>
+<strong>Airports</strong>
 	<TABLE BORDER="1">
 		<TR>
 			<TH>Airport ID</TH>
-			<TH>Airport Abbr.</TH>
-			<TH>Airport Name</TH>
 		</TR>
 		<% while(resultSet2.next()){ %>
 		<TR>
 			<TD><%= resultSet2.getString(1) %></td>
-			<TD><%= resultSet2.getString(2) %></TD>
-			<TD><%= resultSet2.getString(3) %></TD>
 		</TR>
 		<% } %>
 	</TABLE>
 </div>	
 	<br><br>
 	
-		<% 
-		Statement statement3 = connection.createStatement();
-    	ResultSet resultSet3 = statement.executeQuery("select * from Aircraft");	
-    %>
+		<%     	ResultSet resultSet3 = statement.executeQuery("select * from Aircraft");    %>
 <div>
+<strong>Aircraft</strong>
 	<TABLE BORDER="1">
 		<TR>
 			<TH>Aircraft ID</TH>
-			<TH>Aircraft Seats</TH>
 		</TR>
 		<% while(resultSet3.next()){ %>
 		<TR>
 			<TD><%= resultSet3.getString(1) %></td>
-			<TD><%= resultSet3.getString(2) %></TD>
+		</TR>
+		<% } %>
+	</TABLE>
+</div>	
+	<br><br>
+	<%     	ResultSet resultSet4 = statement.executeQuery("select * from Airlines");	   %>
+<div>
+<strong>Airlines</strong>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Airline ID</TH>
+			<TH>Airline Name</TH>
+		</TR>
+		<% while(resultSet4.next()){ %>
+		<TR>
+			<TD><%= resultSet4.getString(1) %></td>
+			<TD><%= resultSet4.getString(2) %></td>
+		</TR>
+		<% } %>
+	</TABLE>
+</div>	
+	<br><br>
+	<%     	ResultSet resultSet5 = statement.executeQuery("select * from Uses");	   %>
+<div>
+<strong>USES</strong>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Aircraft ID</TH>
+			<TH>Flight#</TH>
+			<TH>Airline ID</TH>
+		</TR>
+		<% while(resultSet5.next()){ %>
+		<TR>
+			<TD><%= resultSet5.getString(1) %></td>
+			<TD><%= resultSet5.getString(2) %></td>
+			<TD><%= resultSet5.getString(3) %></td>
+		</TR>
+		<% } %>
+	</TABLE>
+</div>	
+	<br><br>
+	
+	<%     	ResultSet resultSet6 = statement.executeQuery("select * from Days");	   %>
+<div>
+<strong>DAYS</strong>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Day </TH>
+			<TH>Day of the Week</TH>
+		</TR>
+		<% while(resultSet6.next()){ %>
+		<TR>
+			<TD><%= resultSet6.getString(1) %></td>
+			<TD><%= resultSet6.getString(2) %></td>
+		</TR>
+		<% } %>
+	</TABLE>
+</div>	
+	<br><br> 
+	
+	<%     	ResultSet resultSet7 = statement.executeQuery("select * from flights_on");	   %>
+<div>
+<strong>FLIGHTS ON</strong>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Day </TH>
+			<TH>Flight#</TH>
+			<TH>Airline ID</TH>
+		</TR>
+		<% while(resultSet7.next()){ %>
+		<TR>
+			<TD><%= resultSet7.getString(1) %></td>
+			<TD><%= resultSet7.getString(2) %></td>
+			<TD><%= resultSet7.getString(3) %></td>
+		</TR>
+		<% } %>
+	</TABLE>
+</div>	
+	<br><br> 
+	
+	<%     	ResultSet resultSet8 = statement.executeQuery("select * from Owns");	   %>
+<div>
+<strong>OWNS</strong>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Airline ID</TH>
+			<TH>Aircraft ID</TH>
+		</TR>
+		<% while(resultSet8.next()){ %>
+		<TR>
+			<TD><%= resultSet8.getString(1) %></td>
+			<TD><%= resultSet8.getString(2) %></td>
 		</TR>
 		<% } %>
 	</TABLE>
@@ -132,24 +212,32 @@ function validateForm() {
 	<br><br>
 	
 	<form name="Edit" onsubmit="return validateForm()" action="cRepExecuteE.jsp" method ="POST">
-       Please enter the flight# you'd like to edit: <input type="text" name="fID"><br><br>
-       If you do not have a new value please leave the space blank.<br>
-       Please enter the new type(One Way, Round Trip, or Flexible): <input type="text" name="type"><br>
-       Please enter the new departure date(YYYY/MM/DD): <input type="text" name="dDate"><br>
-       Please enter the new arrival date(YYYY/MM/DD): <input type="text" name="aDate"><br>
-       Please enter the new departure time(HH:MM:SS): <input type="text" name="dTime"><br>
-       Please enter the new arrival time(HH:MM:SS): <input type="text" name="aTime"><br>
-       Please enter the new first class fare: <input type="text" name="fFare"><br>
-       Please enter the new economy fare: <input type="text" name="eFare"><br>
-       Please enter the new business fare: <input type="text" name="bFare"><br>
-       Please enter the new number of available seats: <input type="text" name="aSeats"><br>
-       Please enter if the flight is full or not (true/false): <input type="text" name="isFull"><br>
-       Please enter the new number of stops for this flight: <input type="text" name="nos"><br>
-       Please enter the new price of this flight: <input type="text" name="price"><br>
-       Please enter the new booking fee on this flight: <input type="text" name="bFee"><br>
+	<strong>Please leave it blank if you have no new information</strong>
+       Please enter the flight# you want to edit: <input type="text" name="fID"><br>
+       Please enter a new type(Domestic or International): <input type="text" name="DItype"><br>
+       Please enter a new Trip Type(One Way, Round Trip, Flexible): <input type="text" name="tType"><br>
        Please enter the new departure airport for this flight: <input type="text" name="dAirport"><br>
        Please enter the new arrival airport for this flight: <input type="text" name="aAirport"><br>
-       Please enter the new aircraft id for this flight: <input type="text" name="aID"><br>
+       Please enter a new departure date(YYYY/MM/DD): <input type="text" name="dDate"><br>
+       Please enter a new arrival date(YYYY/MM/DD): <input type="text" name="aDate"><br>
+	   Please select the new day of the week it's on:
+			<select name = "DOW">
+				<option value="1">Sunday</option>
+				<option value="2">Monday</option>
+				<option value="3">Tuesday</option>
+				<option value="4">Wednesday</option>
+				<option value="5">Thursday</option>
+				<option value="6">Friday</option>
+				<option value="7">Saturday</option>
+			</select> 
+       Please enter a new departure time(HH:MM:SS): <input type="text" name="dTime"><br>
+       Please enter a new arrival time(HH:MM:SS): <input type="text" name="aTime"><br>
+       Please enter a new first class fare: <input type="text" name="fFare"><br>
+       Please enter a new business fare: <input type="text" name="bFare"><br>
+       Please enter a new economy fare: <input type="text" name="eFare"><br>
+ 	   Please enter the new airline id for this flight: <input type="text" name="alID"><br>
+       Please enter the new aircraft id for this flight:(Airline and Aircraft ID pair must match the Owns table) <input type="text" name="aID"><br>
+       Please enter the new number of stops for this flight: <input type="text" name="nos"><br>
        <input type="submit" value="Edit"> <br>
     </form>
 

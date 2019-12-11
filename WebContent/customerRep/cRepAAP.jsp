@@ -27,9 +27,7 @@ String type = (String) session.getAttribute("type");
 <script>
 function validateForm() {
 	  var id = document.forms["Add"]["id"].value;
-	  var abbr = document.forms["Add"]["Abbr"].value;
-	  var name = document.forms["Add"]["Name"].value;
-	  if ((id.trim() == "" || abbr.trim() == "" || name.trim() == "") && abbr.length < 4) {
+	  if ((id.trim() == "")) {
 	    alert("ERROR: PLEASE ENTER ALL OF THE VALUES!!!");
 	    return false;
 	  }
@@ -51,14 +49,10 @@ function validateForm() {
 	<TABLE BORDER="1">
 		<TR>
 			<TH>Airport ID</TH>
-			<TH>Airport Abbr.</TH>
-			<TH>Airport Name</TH>
 		</TR>
 		<% while(resultSet.next()){ %>
 		<TR>
 			<TD><%= resultSet.getString(1) %></td>
-			<TD><%= resultSet.getString(2) %></TD>
-			<TD><%= resultSet.getString(3) %></TD>
 		</TR>
 		<% } %>
 	</TABLE>
@@ -67,8 +61,6 @@ function validateForm() {
 	
 <form name="Add" onsubmit="return validateForm()" action="cRepExecuteA.jsp" method ="POST">
        Please enter a unique Airport id: <input type="text" name="id"><br>
-       Please enter a unique Airport Abbreviation: <input type="text" name="Abbr"><br>
-       Please enter a unique Airport Name: <input type="text" name="Name"><br>
        <input type="submit" value="Add"> <br>
     </form>
     

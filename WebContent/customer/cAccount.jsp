@@ -18,53 +18,63 @@ try{
 %>
 
 <%
-String type = (String) session.getAttribute("type");
+String flightNum = request.getParameter("Flight");
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-function validateForm() {
-	  var id = document.forms["Edit"]["id"].value;
-	  if (id.trim() == "") {
-	    alert("ERROR: PLEASE ENTER THE ID YOU WOULD LIKE TO EDIT!!!");
-	    return false;
-	  }
-	}
-</script>
 <meta charset="ISO-8859-1">
-<title>Edit</title>
+<title>Account Reservations</title>
 </head>
 <body>
 <div>Welcome <%=session.getAttribute("user")%></div>
-	<p>Please add the information for the <%=type%> you want to edit in the form below.</p>
+	<p>Here is the waiting list for Flight <%=flightNum %>.</p>
 	<% 
+		ResultSet resultSet = null;
 		String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
 		Connection connection = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");
 		Statement statement = connection.createStatement();
-    	ResultSet resultSet = statement.executeQuery("select * from "+ type +"");	
+		Statement statement2 = connection.createStatement();
+    	resultSet = statement.executeQuery("select * from Waitinglist w where w.flight = '"+ flightNum +"'");	
+		ResultSet testSet = statement2.executeQuery("select * from Waitinglist w where w.flight = '"+ flightNum +"'");;
+    	if(testSet.next() == false){
+    		out.println("There is no waiting list for this flight, or the flight doesn't exist.");
+    		out.println("<a href='cRepHome.jsp'>Click Here</a> to try again.");
+    		return;
+    	}
     %>
+    <% 
+    String time = request.getParameter("Selection");
+    if(time.equals("Past")){%>
 <div>
 	<TABLE BORDER="1">
 		<TR>
-			<TH>Aircraft ID</TH>
+			<TH>Past Reservations</TH>
 		</TR>
 		<% while(resultSet.next()){ %>
 		<TR>
-			<TD><%= resultSet.getString(1) %></td>
+			<TD><%= resultSet.getString(2) %></TD>
 		</TR>
 		<% } %>
 	</TABLE>
-</div>	
-	<br><br>
-	
-	<form name="Edit" onsubmit="return validateForm()" action="cRepExecuteE.jsp" method ="POST">
-       Please enter the old Aircraft id: <input type="text" name="id"><br><br>
-       Please enter the new Aircraft id: <input type="text" name="Nid"><br><br>
-       <input type="submit" value="Edit"> <br>
-    </form>
-
+</div>
+	<%}%>
+	 <% 
+    if(time.equals("Upcoming")){%>
+<div>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Upcoming Reservations</TH>
+		</TR>
+		<% while(resultSet.next()){ %>
+		<TR>
+			<TD><%= resultSet.getString(2) %></TD>
+		</TR>
+		<% } %>
+	</TABLE>
+</div>
+	<%}%>
 	<br><br>
 	<a href='cRepHome.jsp'>Home Page</a>
 	<a href='../logout.jsp'>Log out</a>
