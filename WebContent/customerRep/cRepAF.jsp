@@ -40,12 +40,11 @@ function validateForm() {
 	  var alID = document.forms["Add"]["alID"].value;
 	  var aID = document.forms["Add"]["aID"].value;
 	  var nos = document.forms["Add"]["nos"].value;
-	  var DOW = document.forms["Add"]["DOW"].value;
+
 	  if (fid.trim() == "" || type.trim() == "" || tType.trim() == ""  || dAirport.trim() == ""
 		  || aAirport.trim() == "" || dDate.trim() == "" || aDate.trim() == ""
 			  || dTime.trim() == "" || aTime.trim() == "" || fFare.trim() == "" || bFare.trim() == ""  
-			  || eFare.trim() == "" || alID.trim() == ""|| aID.trim() == ""|| nos.trim() == ""
-				  || DOW.trim() == "") {
+			  || eFare.trim() == "" || alID.trim() == ""|| aID.trim() == ""|| nos.trim() == "") {
 	    alert("ERROR: PLEASE ENTER ALL OF THE VALUES!!!");
 	    return false;
 	  }
@@ -173,45 +172,7 @@ function validateForm() {
 	</TABLE>
 </div>	
 	<br><br>
-	
-	<%     	ResultSet resultSet6 = statement.executeQuery("select * from Days");	   %>
-<div>
-<strong>DAYS</strong>
-	<TABLE BORDER="1">
-		<TR>
-			<TH>Day </TH>
-			<TH>Day of the Week</TH>
-		</TR>
-		<% while(resultSet6.next()){ %>
-		<TR>
-			<TD><%= resultSet6.getString(1) %></td>
-			<TD><%= resultSet6.getString(2) %></td>
-		</TR>
-		<% } %>
-	</TABLE>
-</div>	
-	<br><br> 
-	
-	<%     	ResultSet resultSet7 = statement.executeQuery("select * from flights_on");	   %>
-<div>
-<strong>FLIGHTS ON</strong>
-	<TABLE BORDER="1">
-		<TR>
-			<TH>Day </TH>
-			<TH>Flight#</TH>
-			<TH>Airline ID</TH>
-		</TR>
-		<% while(resultSet7.next()){ %>
-		<TR>
-			<TD><%= resultSet7.getString(1) %></td>
-			<TD><%= resultSet7.getString(2) %></td>
-			<TD><%= resultSet7.getString(3) %></td>
-		</TR>
-		<% } %>
-	</TABLE>
-</div>	
-	<br><br> 
-	
+
 	<%     	ResultSet resultSet8 = statement.executeQuery("select * from Owns");	   %>
 <div>
 <strong>OWNS</strong>
@@ -238,16 +199,6 @@ function validateForm() {
        Please enter the arrival airport for this flight: <input type="text" name="aAirport"><br>
        Please enter a unique departure date(YYYY/MM/DD): <input type="text" name="dDate"><br>
        Please enter a unique arrival date(YYYY/MM/DD): <input type="text" name="aDate"><br>
-	   Please select the day of the week it's on:
-			<select name = "DOW">
-				<option value="1">Sunday</option>
-				<option value="2">Monday</option>
-				<option value="3">Tuesday</option>
-				<option value="4">Wednesday</option>
-				<option value="5">Thursday</option>
-				<option value="6">Friday</option>
-				<option value="7">Saturday</option>
-			</select> 
        Please enter a unique departure time(HH:MM:SS): <input type="text" name="dTime"><br>
        Please enter a unique arrival time(HH:MM:SS): <input type="text" name="aTime"><br>
        Please enter a unique first class fare: <input type="text" name="fFare"><br>
