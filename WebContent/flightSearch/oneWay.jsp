@@ -55,16 +55,7 @@ session.setAttribute("Filter", "none");
 
 		<strong>Number of Passengers:</strong> <input name="someid" type="number"/> <br><br> 
 		
-		<strong>Day:</strong>
-		<select name = "day_num"> <!-- day is the variable NAME -->
-			<option value="1">Sunday</option> <!-- these are the values inside of day -->
-			<option value="2">Monday</option>
-			<option value="3">Tuesday</option>
-			<option value="4">Wednesday</option>
-			<option value="5">Thursday</option>
-			<option value="6">Friday</option>
-			<option value="7">Saturday</option>
-		</select>
+		<strong>Departure Date:</strong> <input type="date" name="DEPARTURE DATE" />
 
 		<strong>Flight Type:</strong>
 		<select name = "type">
