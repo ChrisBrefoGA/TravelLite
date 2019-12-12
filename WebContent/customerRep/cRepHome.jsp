@@ -22,10 +22,11 @@ try{
 	<form>	
 		Make reservation for user: <input type = "text" name = "username">
 								   <button onclick="location.href='cRepFR.jsp'" type="button">Submit</button><br> <br>
-		
-		Edit reservation for user: <input type = "text" name = "username">
-								   <button onclick="location.href='.jsp'" type="button">Submit</button> <br> <br>
 	</form>	
+		<form action="cRepEdit.jsp" method ="POST">
+       EDIT | enter a user to have their reservation edited(give current username): <input type="text" name="user">
+       <input type="submit" value="Edit User"> <br>
+    </form>
 	<br>	
 	<form action = "cRepA.jsp" method = "POST">
 			<strong>Add a Flight, Aircraft, or Airport:</strong>
