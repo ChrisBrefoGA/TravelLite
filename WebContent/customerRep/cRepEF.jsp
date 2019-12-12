@@ -155,44 +155,6 @@ function validateForm() {
 </div>	
 	<br><br>
 	
-	<%     	ResultSet resultSet6 = statement.executeQuery("select * from Days");	   %>
-<div>
-<strong>DAYS</strong>
-	<TABLE BORDER="1">
-		<TR>
-			<TH>Day </TH>
-			<TH>Day of the Week</TH>
-		</TR>
-		<% while(resultSet6.next()){ %>
-		<TR>
-			<TD><%= resultSet6.getString(1) %></td>
-			<TD><%= resultSet6.getString(2) %></td>
-		</TR>
-		<% } %>
-	</TABLE>
-</div>	
-	<br><br> 
-	
-	<%     	ResultSet resultSet7 = statement.executeQuery("select * from flights_on");	   %>
-<div>
-<strong>FLIGHTS ON</strong>
-	<TABLE BORDER="1">
-		<TR>
-			<TH>Day </TH>
-			<TH>Flight#</TH>
-			<TH>Airline ID</TH>
-		</TR>
-		<% while(resultSet7.next()){ %>
-		<TR>
-			<TD><%= resultSet7.getString(1) %></td>
-			<TD><%= resultSet7.getString(2) %></td>
-			<TD><%= resultSet7.getString(3) %></td>
-		</TR>
-		<% } %>
-	</TABLE>
-</div>	
-	<br><br> 
-	
 	<%     	ResultSet resultSet8 = statement.executeQuery("select * from Owns");	   %>
 <div>
 <strong>OWNS</strong>
@@ -215,21 +177,11 @@ function validateForm() {
 	<strong>Please leave it blank if you have no new information</strong>
        Please enter the flight# you want to edit: <input type="text" name="fID"><br>
        Please enter a new type(Domestic or International): <input type="text" name="DItype"><br>
-       Please enter a new Trip Type(One Way, Round Trip, Flexible): <input type="text" name="tType"><br>
+       Please enter a new Trip Type(One-Way, Round-Trip, Flexible): <input type="text" name="tType"><br>
        Please enter the new departure airport for this flight: <input type="text" name="dAirport"><br>
        Please enter the new arrival airport for this flight: <input type="text" name="aAirport"><br>
        Please enter a new departure date(YYYY/MM/DD): <input type="text" name="dDate"><br>
        Please enter a new arrival date(YYYY/MM/DD): <input type="text" name="aDate"><br>
-	   Please select the new day of the week it's on:
-			<select name = "DOW">
-				<option value="1">Sunday</option>
-				<option value="2">Monday</option>
-				<option value="3">Tuesday</option>
-				<option value="4">Wednesday</option>
-				<option value="5">Thursday</option>
-				<option value="6">Friday</option>
-				<option value="7">Saturday</option>
-			</select> 
        Please enter a new departure time(HH:MM:SS): <input type="text" name="dTime"><br>
        Please enter a new arrival time(HH:MM:SS): <input type="text" name="aTime"><br>
        Please enter a new first class fare: <input type="text" name="fFare"><br>

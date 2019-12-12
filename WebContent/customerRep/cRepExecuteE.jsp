@@ -54,7 +54,7 @@ if(type.equals("Flights")){
 		String alID = request.getParameter("alID");	
 		String AID = request.getParameter("aID");
 		String nos = request.getParameter("nos");
-		String DOW = request.getParameter("DOW");
+
 	if(tYP.trim().isEmpty()){
 		tYP = resultSet3.getString(2);
 	}
@@ -112,8 +112,6 @@ if(type.equals("Flights")){
 	statement.executeUpdate("UPDATE Flights SET airline_id ='"+ alID +"'  where flight_num = '"+ FN +"'");
 	statement.executeUpdate("UPDATE Flights SET aircraft_id ='"+ AID +"'  where flight_num = '"+ FN +"'");
 	statement.executeUpdate("UPDATE Flights SET  num_stops = '"+ nos +"' where flight_num = '"+ FN +"'");
-	statement.executeUpdate("UPDATE flights_on SET day_number = '"+ DOW +"' where flight_number ='" + FN +"'");
-	statement.executeUpdate("UPDATE flights_on SET  airline_id = '"+ alID +"'where flight_number='" + FN +"'");
 	statement.executeUpdate("UPDATE Uses SET airline_id = '"+ alID +"'where flight_number= '"+ FN +"'");
 	statement.executeUpdate("UPDATE Uses SET aircraft_id = '"+ AID +"' where flight_number= '"+ FN +"'");
 	out.println("We completed your edit inquiry!!<a href='cRepHome.jsp'>Click Here</a> to go back to the home page");

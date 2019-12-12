@@ -52,8 +52,7 @@ if(type.equals("Flights")){
 	String eFirst = request.getParameter("eFare");	
 	String alID = request.getParameter("alID");	
 	String AID = request.getParameter("aID");
-	String nos = request.getParameter("nos");
-	String DOW = request.getParameter("DOW");	
+	String nos = request.getParameter("nos");	
 	ps.setString(1, FN);
 	ps.setString(2, tYP);
 	ps.setString(3, tType);
@@ -76,12 +75,6 @@ if(type.equals("Flights")){
 	ps2.setString(2, FN);
 	ps2.setString(3, alID);
 	ps2.executeUpdate();
-	String insrt3=("INSERT INTO flights_on (day_number, flight_number, airline_id)"+"VALUES(?,?,?)");// The Insert string for the Flights
-	PreparedStatement ps3 = con.prepareStatement(insrt3);//The string gets converted for SQL use
-	ps3.setString(1,DOW);
-	ps3.setString(2, FN);
-	ps3.setString(3, alID);
-	ps3.executeUpdate();
 	out.println("We completed your addition inquiry!!<a href='cRepHome.jsp'>Click Here</a> to go back to the home page");
 	out.println("<a href='cRepAF.jsp'>Click Here</a> to add another one.");
 	}catch(SQLException a){
