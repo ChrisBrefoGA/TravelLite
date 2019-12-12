@@ -32,5 +32,11 @@
        <input type="submit" value="UPDATE INFORMATION"> <br>
     </form>
 
+    <br>
+
+    <form action="adminHome.jsp" method ="POST">
+        <input type="submit" value="Go Back"> <br>
+    </form>
+
 </body>
 </html>
