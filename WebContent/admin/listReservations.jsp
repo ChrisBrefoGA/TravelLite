@@ -36,7 +36,12 @@ try{
 	String input = request.getParameter("input");
 	Statement st = con.createStatement();
 	ResultSet rs = null;
-	rs = st.executeQuery("select * from Ticket where" + inputType + " = " + input);
+	if (inputType.equals("flight_num")) {
+		rs = st.executeQuery("select * from Ticket where " + inputType + " = " + input);
+	}
+	else if (inputType.equals("userid")) {
+		rs = st.executeQuery("select * from Ticket where " + inputType + " = '" + input + "'");
+	}
     %>
 
     <%-- table --%>
@@ -50,15 +55,15 @@ try{
 			<TH>Username</TH>
 			<TH>Total Fare</TH>
 		</TR>
-		<% while(resultSet.next()){ %>
+		<% while(rs.next()){ %>
 		<TR>
-			<TD><%= resultSet.getString(1) %></TD>
-			<TD><%= resultSet.getString(2) %></TD>
-			<TD><%= resultSet.getString(3) %></TD>
-			<TD><%= resultSet.getString(4) %></TD>
-			<TD><%= resultSet.getString(5) %></TD>
-			<TD><%= resultSet.getString(6) %></TD>
-			<TD><%= resultSet.getString(7) %></TD>
+			<TD><%= rs.getString(1) %></TD>
+			<TD><%= rs.getString(2) %></TD>
+			<TD><%= rs.getString(3) %></TD>
+			<TD><%= rs.getString(4) %></TD>
+			<TD><%= rs.getString(5) %></TD>
+			<TD><%= rs.getString(6) %></TD>
+			<TD><%= rs.getString(7) %></TD>
 		</TR>
 		<% } %>
 	</TABLE>

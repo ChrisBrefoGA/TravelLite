@@ -37,15 +37,20 @@ try{
 	Statement st = con.createStatement();
 	ResultSet rs = null;
 	if(inputType.equals("flight_num")){
-		rs = st.executeQuery("select flight_num, total_fare from (select flight_num, sum(total_fare) from Ticket group by flight_num order by total_fare) limit 1");
-		
+		rs = st.executeQuery("select flight_num, total from (select flight_num, sum(total_fare) total from Ticket where flight_num = '" + input + "' group by flight_num order by total_fare) tab limit 1");
+	}
+	else if(inputType.equals("airline_id")){
+		rs = st.executeQuery("select airline_id, total from (select Flights.airline_id, sum(total_fare) total from Ticket, Flights where Flights.flight_num = Ticket.flight_num and Flights.airline_id = '" + input + "' group by Ticket.flight_num order by total_fare) tab limit 1");
+	}
+	else if(inputType.equals("userid")){
+		rs = st.executeQuery("select userid, total from (select userid, sum(total_fare) total from Ticket where userid = '" + input + "' group by userid order by total_fare) tab limit 1");
 	}
     %>
 
     <TABLE BORDER="1">
 	<TR>
-		<TH>Flight Umber</TH>
-		<TH>Total Fare</TH>
+		<TH><%=inputType%></TH>
+		<TH>Total Revenue</TH>
 	</TR>
 	<% while(rs.next()){ %>
 	<TR>

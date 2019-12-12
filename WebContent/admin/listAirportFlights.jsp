@@ -35,7 +35,7 @@ try{
 	String airport_id = request.getParameter("airport_id");
 	Statement st = con.createStatement();
 	ResultSet rs = null;
-	rs = st.executeQuery("select flight_num, flight_id from Flights where Departure = " + airport_id);
+	rs = st.executeQuery("select flight_num, airline_id from Flights where Departure = '" + airport_id + "'");
     %>
 
     <%-- table --%>
@@ -44,10 +44,10 @@ try{
 			<TH>Flight Number</TH>
 			<TH>Flight ID</TH>
 		</TR>
-		<% while(resultSet.next()){ %>
+		<% while(rs.next()){ %>
 		<TR>
-			<TD><%= resultSet.getString(1) %></TD>
-			<TD><%= resultSet.getString(2) %></TD>
+			<TD><%= rs.getString(1) %></TD>
+			<TD><%= rs.getString(2) %></TD>
 		</TR>
 		<% } %>
 	</TABLE>
