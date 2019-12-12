@@ -185,7 +185,7 @@
 			
 	<% }else if(trip.equals("Round-Trip") || trip.equals("Flexible")){ %>
 		
-		<%if(trip.equals("Round Trip")){ %>
+		<%if(trip.equals("Round-Trip")){ %>
 			<h1>Round Trip Flights</h1>
 			<br>
 		<% }else{ %>
@@ -199,12 +199,12 @@
 			<TH>Flight Type</TH>
 			<TH>Trip Type</TH>
 			<TH>Departure</TH>
-			<TH><%=session.getAttribute("class")%> Price</TH>
 			<TH>Destination</TH>
 			<TH>Depart Day</TH>
 			<TH>Arrival Day</TH>
 			<TH>Depart Time</TH>
 			<TH>Arrival Time</TH>
+			<TH><%=session.getAttribute("class")%> Price</TH>
 		</TR>
 		<% while(rs.next()){ %>
 		<TR>
@@ -212,19 +212,44 @@
 			<TD><%= rs.getString(2) %></TD>
 			<TD><%= rs.getString(3) %></td>
 			<TD><%= rs.getString(4) %></TD>
-			<TD><%= rs.getString(5) %></td>
+			<TD><%= rs.getString(5) %></TD>
 			<TD><%= rs.getString(6) %></TD>
 			<TD><%= rs.getString(7) %></TD>
-			<TD><%= rs.getString(8) %></td>
+			<TD><%= rs.getString(8) %></td>	
 			<TD><%= rs.getString(9) %></td>
 			<TD><%= rs.getString(10) %></td>
 		</TR>
 		<% } %>
-	</TABLE>
+	</TABLE>	
 	
 	<br> <br>
 	
-	<button type="button">Choose a Flight</button>
+	<form action = "flightSearchResults.jsp" method = "POST">		
+		Sort by:
+			<input type="radio" name="sort" value= <%=session.getAttribute("class")%> checked> <%=session.getAttribute("class")%> 
+    		<input type="radio" name="sort" value="depart_time"> Departure time
+			<input type="radio" name="sort" value="arrive_time"> Arrival time<br> <br>
+		
+		Filter by: <br> <br>
+		
+		Price: 
+		<input type="text" name="flight_price" value = "<500">  
+ 		
+ 		<br> <br>
+ 		
+ 		Number of stops: 
+		<input type="text" name="number_stops" value = 0>
+ 		
+ 		<br> <br>
+ 		
+ 		Airline: 
+ 		<input type="text" name="airline_name" value = "AA">
+		
+		<br> <br>	
+		
+		<button type = "submit"> Filter Flights </button>		
+		</form>
+	
 	
 	<br> <br>
 	
@@ -234,32 +259,57 @@
 			<TH>Flight Type</TH>
 			<TH>Trip Type</TH>
 			<TH>Departure</TH>
-			<TH><%=session.getAttribute("class")%> Price</TH>
 			<TH>Destination</TH>
 			<TH>Depart Day</TH>
 			<TH>Arrival Day</TH>
 			<TH>Depart Time</TH>
 			<TH>Arrival Time</TH>
+			<TH><%=session.getAttribute("class")%> Price</TH>
 		</TR>
-		<% while(rs2.next()){ %>
+		<% while(rs.next()){ %>
 		<TR>
-			<TD><%= rs2.getString(1) %></td>
-			<TD><%= rs2.getString(2) %></TD>
-			<TD><%= rs2.getString(3) %></td>
-			<TD><%= rs2.getString(6) %></TD>
-			<TD><%= rs2.getString(5) %></td>
-			<TD><%= rs2.getString(4) %></TD>
-			<TD><%= rs2.getString(7) %></TD>
-			<TD><%= rs2.getString(8) %></td>
-			<TD><%= rs2.getString(9) %></td>
-			<TD><%= rs2.getString(10) %></td>
+			<TD><%= rs.getString(1) %></td>
+			<TD><%= rs.getString(2) %></TD>
+			<TD><%= rs.getString(3) %></td>
+			<TD><%= rs.getString(4) %></TD>
+			<TD><%= rs.getString(5) %></TD>
+			<TD><%= rs.getString(6) %></TD>
+			<TD><%= rs.getString(7) %></TD>
+			<TD><%= rs.getString(8) %></td>	
+			<TD><%= rs.getString(9) %></td>
+			<TD><%= rs.getString(10) %></td>
 		</TR>
 		<% } %>
-	</TABLE>
+	</TABLE>	
 	
 	<br>
 	
-	<button type="button">Choose a Flight</button>
+	<form action = "flightSearchResults.jsp" method = "POST">		
+		Sort by:
+			<input type="radio" name="sort" value= <%=session.getAttribute("class")%> checked> <%=session.getAttribute("class")%> 
+    		<input type="radio" name="sort" value="depart_time"> Departure time
+			<input type="radio" name="sort" value="arrive_time"> Arrival time<br> <br>
+		
+		Filter by: <br> <br>
+		
+		Price: 
+		<input type="text" name="flight_price" value = "<500">  
+ 		
+ 		<br> <br>
+ 		
+ 		Number of stops: 
+		<input type="text" name="number_stops" value = 0>
+ 		
+ 		<br> <br>
+ 		
+ 		Airline: 
+ 		<input type="text" name="airline_name" value = "AA">
+		
+		<br> <br>	
+		
+		<button type = "submit"> Filter Flights </button>		
+		</form>
+	
 
 	<br>
 	
