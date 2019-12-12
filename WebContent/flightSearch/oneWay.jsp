@@ -15,6 +15,7 @@ try{
 
 <%
 String trip = (String) session.getAttribute("type");
+session.setAttribute("Filter", "none");
 %>
 
 <!DOCTYPE html>
@@ -53,6 +54,7 @@ String trip = (String) session.getAttribute("type");
 		<strong>To:</strong> <input type="text" name="TO"/> <br /> <br>
 
 		<strong>Number of Passengers:</strong> <input name="someid" type="number"/> <br><br> 
+		
 		<strong>Departure Date:</strong> <input type="date" name="DEPARTURE DATE" />
 
 		<strong>Flight Type:</strong>
@@ -61,6 +63,7 @@ String trip = (String) session.getAttribute("type");
 			<option value="fare_business">fare_business</option>
 			<option value="fare_first">fare_first</option>
 		</select> 
+		
 		<br><br> 
 		<button type="Submit">Search</button>
 		<button onclick="location.href='../logout.jsp'" type="button">Logout</button>

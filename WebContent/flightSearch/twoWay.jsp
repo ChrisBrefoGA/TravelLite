@@ -15,6 +15,7 @@ try{
 
 <%
 String trip = (String) session.getAttribute("type");
+session.setAttribute("Filter", "none");
 %>
 
 <!DOCTYPE html>

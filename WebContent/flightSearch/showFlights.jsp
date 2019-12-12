@@ -17,12 +17,45 @@
 
 	<% 
 		String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
-		String from = request.getParameter("FROM");
-		String to = request.getParameter("TO");
-		String d_date = request.getParameter("DEPARTURE DATE");
-		String a_date = request.getParameter("RETURN DATE");
-		String trip = (String) session.getAttribute("type");
-		String type = request.getParameter("type");
+		String filter = (String) session.getAttribute("Filter");
+		String from = null;
+		String to = null;
+		String dayNum = null;
+		String d_date = null;
+		String r_date = null;
+		String trip = null;
+		String type = null;
+		
+		if(filter.equals("none")){
+			
+			from = request.getParameter("FROM");
+			session.setAttribute("FM", from);
+			
+			r_date = request.getParameter("RETURN DATE");
+			session.setAttribute("RD", r_date);
+			
+			d_date = request.getParameter("DEPARTURE DATE");
+			session.setAttribute("DD", d_date);
+			
+			to = request.getParameter("TO");
+			session.setAttribute("GOING",to);
+			
+			dayNum = request.getParameter("day_num"); 
+			session.setAttribute("d_n", dayNum);
+			
+			type = request.getParameter("type");
+			session.setAttribute("class", type);
+			
+		}
+		
+		
+		from = (String) session.getAttribute("FM");
+		to = (String) session.getAttribute("GOING");
+		dayNum = (String) session.getAttribute("d_n");
+		type = (String) session.getAttribute("class");
+		trip = (String) session.getAttribute("type");
+		r_date = (String) session.getAttribute("RD");
+		d_date = (String) session.getAttribute("DD");
 		
 		Class.forName("com.mysql.jdbc.Driver");//SQL connection stuff
 		Connection con = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");//SQL connection stuff	
@@ -32,46 +65,46 @@
 	    ResultSet rs2 = null; //second result set for second table for Round Trip and Flexible
 	    
 	    
+		if(trip.equals("One-Way")){
+							
+			if(type.equals("fare_economy")){
+				rs = st.executeQuery("SELECT flight_num, type, tripType, Departure, fare_economy, Destination, depart_day, arrival_day, depart_time, arrival_time FROM Flights WHERE Departure='" + from + "'and Destination='" + to + "'and tripType='" + trip + "'and depart_day='" + d_date + "'");
+			}else if(type.equals("fare_first")){
+				rs = st.executeQuery("SELECT flight_num, type, tripType, Departure, fare_first, Destination, depart_day, arrival_day, depart_time, arrival_time FROM Flights WHERE Departure='" + from + "'and Destination='" + to + "'and tripType='" + trip + "'and depart_day='" + d_date + "'");
+			}else{
+				rs = st.executeQuery("SELECT flight_num, type, tripType, Departure, fare_business, Destination, depart_day, arrival_day, depart_time, arrival_time FROM Flights WHERE Departure='" + from + "'and Destination='" + to + "'and tripType='" + trip + "'and depart_day='" + d_date + "'");
+			}
+			
+		}else if(trip.equals("Round-Trip")){
+			
+			if(type.equals("fare_economy")){
+				rs = st.executeQuery("select flight_num, type, tripType, Departure, fare_economy, Destination, depart_day, arrival_day, depart_time, arrival_time from Flights where Departure='" + from + "'and Destination='" + to + "'and tripType='" + trip + "'and depart_day='" + d_date + "'and arrival_day='" + r_date + "'");
+				rs2 = st2.executeQuery("select flight_num, type, tripType, Departure, fare_economy, Destination, depart_day, arrival_day, depart_time, arrival_time from Flights where Departure='" + to + "'and Destination='" + from + "'and tripType='" + trip + "'and depart_day='" + d_date + "'and arrival_day='" + r_date + "'");
+			}else if(type.equals("fare_first")){
+				rs = st.executeQuery("select flight_num, type, tripType, Departure, fare_first, Destination, depart_day, arrival_day, depart_time, arrival_time from Flights where Departure='" + from + "'and Destination='" + to + "'and tripType='" + trip + "'and depart_day='" + d_date + "'and arrival_day='" + r_date + "'");
+				rs2 = st2.executeQuery("select flight_num, type, tripType, Departure, fare_first, Destination, depart_day, arrival_day, depart_time, arrival_time from Flights where Departure='" + to + "'and Destination='" + from + "'and tripType='" + trip + "'and depart_day='" + d_date + "'and arrival_day='" + r_date + "'");
+			}else{
+				rs = st.executeQuery("select flight_num, type, tripType, Departure, fare_business, Destination, depart_day, arrival_day, depart_time, arrival_time from Flights where Departure='" + from + "'and Destination='" + to + "'and tripType='" + trip + "'and depart_day='" + d_date + "'and arrival_day='" + r_date + "'");
+				rs2 = st2.executeQuery("select flight_num, type, tripType, Departure, fare_business, Destination, depart_day, arrival_day, depart_time, arrival_time from Flights where Departure='" + to + "'and Destination='" + from + "'and tripType='" + trip + "'and depart_day='" + d_date + "'and arrival_day='" + r_date + "'");
+			}
+			
+		}/*else if(trip.equals("Flexible")){
+			
+			if(type.equals("fare_economy")){
+				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_economy, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
+				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_economy, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
+			}else if(type.equals("fare_first")){
+				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_first, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
+				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_first, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
+			}else{
+				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_business, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
+				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_business, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
+			}
+		}*/
 	    
-		if(trip.equals("One Way")){
-			
-			if(type.equals("fare_economy")){
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_economy, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-			}else if(type.equals("fare_first")){
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time,  price, fare_first, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-			}else{
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_business, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-			}
-			
-		}else if(trip.equals("Round Trip")){
-			
-			if(type.equals("fare_economy")){
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_economy, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_economy, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
-			}else if(type.equals("fare_first")){
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_first, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_first, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
-			}else{
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_business, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_business, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
-			}
-			
-		}else if(trip.equals("Flexible")){
-			
-			if(type.equals("fare_economy")){
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_economy, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_economy, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
-			}else if(type.equals("fare_first")){
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_first, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_first, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
-			}else{
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_business, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_business, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
-			}
-		}
     %>
-	
-	<%if(trip.equals("One Way")){ %>
+    
+    <%if(trip.equals("One-Way")){ %>
 	
 		<h1>One Way Flights</h1>
 	
@@ -79,19 +112,14 @@
 		<TR>
 			<TH>Flight #</TH>
 			<TH>Flight Type</TH>
-			<TH>Departure Date</TH>
-			<TH>Arrival Date</TH>
-			<TH>Departure Time</TH>
+			<TH>Trip Type</TH>
+			<TH>Departure</TH>
+			<TH><%=session.getAttribute("class")%> Price</TH>
+			<TH>Destination</TH>
+			<TH>Depart Day</TH>
+			<TH>Arrival Day</TH>
+			<TH>Depart Time</TH>
 			<TH>Arrival Time</TH>
-			<TH>Base Price</TH>
-			<TH>Class Fee</TH>
-			<TH>Booking Fee</TH>
-			<TH>Available Seats</TH>
-			<TH>Number of Stops</TH>
-			<TH>Departure Airport</TH>
-			<TH>Arrival Airport</TH>
-			<TH>Airline</TH>
-			
 		</TR>
 		<% while(rs.next()){ %>
 		<TR>
@@ -103,18 +131,32 @@
 			<TD><%= rs.getString(6) %></TD>
 			<TD><%= rs.getString(7) %></TD>
 			<TD><%= rs.getString(8) %></TD>
-			<TD><%= rs.getString(9) %></td>
+			<TD><%= rs.getString(9) %></td>	
 			<TD><%= rs.getString(10) %></td>
-			<TD><%= rs.getString(11) %></td>
-			<TD><%= rs.getString(12) %></td>
-			<TD><%= rs.getString(13) %></TD>
-			<TD><%= rs.getString(14) %></TD>
-			
 		</TR>
 		<% } %>
-	</TABLE>
-	
+	</TABLE>	
 	<br>
+	
+	<!-- insert new table here -->
+	<%
+	
+	ResultSet resultSet;
+	Statement resultState = con.createStatement();
+	String sorting_parameter = null;
+	String filter_price = null;
+	String filter_stops = null;
+	String filter_airline = null;
+	
+	sorting_parameter = (String) session.getAttribute("s_p");
+	filter_price = (String) session.getAttribute("f_p");
+	filter_stops = (String) session.getAttribute("n_s");
+	filter_airline = (String) session.getAttribute("a_n");
+	
+	
+	//resultSet = resultState.executeQuery("select * from Flights where num_stops = " + filter_stops + " and price " + filter_price + " and airline = " + filter_airline + " order by " + sorting_parameter);
+	
+	%>
 	
 	<form action = "flightSearchResults.jsp" method = "POST">		
 		Sort by:
@@ -149,7 +191,7 @@
 		<button type = "submit"> Filter Flights </button>		
 		</form>
 			
-	<% }else if(trip.equals("Round Trip") || trip.equals("Flexible")){ %>
+	<% }else if(trip.equals("Round-Trip") || trip.equals("Flexible")){ %>
 		
 		<%if(trip.equals("Round Trip")){ %>
 			<h1>Round Trip Flights</h1>
@@ -163,16 +205,14 @@
 		<TR>
 			<TH>Flight #</TH>
 			<TH>Flight Type</TH>
-			<TH>Departure Date</TH>
-			<TH>Return Date</TH> <!-- Changed from Arrival date to return date -->
-			<TH>Departure Time</TH>
+			<TH>Trip Type</TH>
+			<TH>Departure</TH>
+			<TH><%=session.getAttribute("class")%> Price</TH>
+			<TH>Destination</TH>
+			<TH>Depart Day</TH>
+			<TH>Arrival Day</TH>
+			<TH>Depart Time</TH>
 			<TH>Arrival Time</TH>
-			<TH>Price</TH>
-			<TH>Available Seats</TH>
-			<TH>Number of Stops</TH>
-			<TH>Departure Airport</TH>
-			<TH>Arrival Airport</TH>
-			
 		</TR>
 		<% while(rs.next()){ %>
 		<TR>
@@ -182,51 +222,59 @@
 			<TD><%= rs.getString(4) %></TD>
 			<TD><%= rs.getString(5) %></td>
 			<TD><%= rs.getString(6) %></TD>
-			<TD><%= rs.getString(14) %></TD>
+			<TD><%= rs.getString(7) %></TD>
 			<TD><%= rs.getString(8) %></td>
 			<TD><%= rs.getString(9) %></td>
 			<TD><%= rs.getString(10) %></td>
-			<TD><%= rs.getString(11) %></TD>
 		</TR>
 		<% } %>
 	</TABLE>
 	
+	<br> <br>
+	
 	<button type="button">Choose a Flight</button>
+	
+	<br> <br>
 	
 	<TABLE BORDER="1">
 		<TR>
 			<TH>Flight #</TH>
 			<TH>Flight Type</TH>
-			<TH>Departure Date</TH>
-			<TH>Return Date</TH> <!-- Changed from Arrival date to return date -->
-			<TH>Departure Time</TH>
+			<TH>Trip Type</TH>
+			<TH>Departure</TH>
+			<TH><%=session.getAttribute("class")%> Price</TH>
+			<TH>Destination</TH>
+			<TH>Depart Day</TH>
+			<TH>Arrival Day</TH>
+			<TH>Depart Time</TH>
 			<TH>Arrival Time</TH>
-			<TH>Price</TH>
-			<TH>Available Seats</TH>
-			<TH>Number of Stops</TH>
-			<TH>Departure Airport</TH>
-			<TH>Arrival Airport</TH>
-			
 		</TR>
 		<% while(rs2.next()){ %>
 		<TR>
 			<TD><%= rs2.getString(1) %></td>
 			<TD><%= rs2.getString(2) %></TD>
 			<TD><%= rs2.getString(3) %></td>
-			<TD><%= rs2.getString(4) %></TD>
-			<TD><%= rs2.getString(5) %></td>
 			<TD><%= rs2.getString(6) %></TD>
+			<TD><%= rs2.getString(5) %></td>
+			<TD><%= rs2.getString(4) %></TD>
 			<TD><%= rs2.getString(7) %></TD>
 			<TD><%= rs2.getString(8) %></td>
 			<TD><%= rs2.getString(9) %></td>
 			<TD><%= rs2.getString(10) %></td>
-			<TD><%= rs2.getString(11) %></TD>
 		</TR>
 		<% } %>
 	</TABLE>
+	
+	<br>
+	
+	<button type="button">Choose a Flight</button>
 
+	<br>
+	
 	<% } %>
-		
+
+
+
 	<br><br>
 		
 </body>

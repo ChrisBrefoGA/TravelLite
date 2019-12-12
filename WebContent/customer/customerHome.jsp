@@ -43,8 +43,8 @@ try{
 
 		<h2>Search for Flights in TravelLite!</h2>
 		<strong>Flight Class:</strong> <select name = "flight-class">
-				<option value="One Way">One-Way</option>
-				<option value="Round Trip">Two-Way</option>
+				<option value="One-Way">One-Way</option>
+				<option value="Round-Trip">Two-Way</option>
 				<option value="Flexible">Flexible</option>
 			</select>
 		<button type="submit" value="continue">Continue</button>

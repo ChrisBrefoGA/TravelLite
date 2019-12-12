@@ -18,10 +18,10 @@ String type = request.getParameter("flight-class");
 session.setAttribute("type",type);
 %>
 <% 
-if(type.equals("One Way")){//For one-way
+if(type.equals("One-Way")){//For one-way
   response.sendRedirect("oneWay.jsp");
 }
-else if(type.equals("Round Trip")){//For two-way
+else if(type.equals("Round-Trip")){//For two-way
         	response.sendRedirect("twoWay.jsp");
         }
 else if(type.equals("Flexible")){//For flexible
