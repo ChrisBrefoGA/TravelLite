@@ -39,6 +39,19 @@ try{
     %>
 
     <%-- table --%>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Flight Number</TH>
+			<TH>Flight ID</TH>
+		</TR>
+		<% while(resultSet.next()){ %>
+		<TR>
+			<TD><%= resultSet.getString(1) %></TD>
+			<TD><%= resultSet.getString(2) %></TD>
+		</TR>
+		<% } %>
+	</TABLE>
+
 
     <br>
 

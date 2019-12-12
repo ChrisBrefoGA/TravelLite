@@ -40,6 +40,28 @@ try{
     %>
 
     <%-- table --%>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Ticket Number</TH>
+			<TH>Round Trip</TH>
+			<TH>Booking Fee</TH>
+			<TH>Issue Date</TH>
+			<TH>Flight Number</TH>
+			<TH>Username</TH>
+			<TH>Total Fare</TH>
+		</TR>
+		<% while(resultSet.next()){ %>
+		<TR>
+			<TD><%= resultSet.getString(1) %></TD>
+			<TD><%= resultSet.getString(2) %></TD>
+			<TD><%= resultSet.getString(3) %></TD>
+			<TD><%= resultSet.getString(4) %></TD>
+			<TD><%= resultSet.getString(5) %></TD>
+			<TD><%= resultSet.getString(6) %></TD>
+			<TD><%= resultSet.getString(7) %></TD>
+		</TR>
+		<% } %>
+	</TABLE>
 
     <br>
 
