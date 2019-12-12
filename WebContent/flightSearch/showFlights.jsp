@@ -26,6 +26,7 @@
 		String trip = null;
 		String type = null;
 		
+		
 		if(filter.equals("none")){
 			
 			from = request.getParameter("FROM");
@@ -47,12 +48,11 @@
 			session.setAttribute("class", type);
 			
 		}
-		
-		
+				
 		from = (String) session.getAttribute("FM");
 		to = (String) session.getAttribute("GOING");
 		dayNum = (String) session.getAttribute("d_n");
-		type = (String) session.getAttribute("class");
+		type = (String) session.getAttribute("class");		
 		trip = (String) session.getAttribute("type");
 		r_date = (String) session.getAttribute("RD");
 		d_date = (String) session.getAttribute("DD");
@@ -61,6 +61,12 @@
 		Connection con = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");//SQL connection stuff	
 		Statement st = con.createStatement();
 		Statement st2 = con.createStatement(); //statement for second result set
+		ResultSet resultSet;
+		Statement resultState = con.createStatement();
+		String sorting_parameter = null;
+		String filter_price = null;
+		String filter_stops = null;
+		String filter_airline = null;
 	    ResultSet rs = null;
 	    ResultSet rs2 = null; //second result set for second table for Round Trip and Flexible
 	    
@@ -88,22 +94,33 @@
 				rs2 = st2.executeQuery("select flight_num, type, tripType, Departure, fare_business, Destination, depart_day, arrival_day, depart_time, arrival_time from Flights where Departure='" + to + "'and Destination='" + from + "'and tripType='" + trip + "'and depart_day='" + d_date + "'and arrival_day='" + r_date + "'");
 			}
 			
-		}/*else if(trip.equals("Flexible")){
+		}
+	    
+		int class_type = 0;
+		if(filter.equals("filter")) {
 			
-			if(type.equals("fare_economy")){
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_economy, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_economy, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
-			}else if(type.equals("fare_first")){
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_first, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_first, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
-			}else{
-				rs = st.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_business, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + from + "' and arrival_airport='" + to + "' and depart_date='" + d_date + "' and type='" + trip + "'");
-				rs2 = st2.executeQuery("select flight_number, type, depart_date, arrival_date, depart_time, arrive_time, price, fare_business, booking_fee, available_seats, num_stops, departure_airport, arrival_airport, airline from Flight where departure_airport='" + to + "' and arrival_airport='" + from + "' and depart_date='" + a_date + "' and type='" + trip + "'");
+			if(type.equals("fare_first")) {
+				class_type = 10;
 			}
-		}*/
+			if(type.equals("fare_business")) {
+				class_type = 11;
+			}
+			if(type.equals("fare_economy")) {
+				class_type = 12;
+			}
+			sorting_parameter = (String) session.getAttribute("s_p");
+			System.out.println(sorting_parameter);
+			filter_price = (String) session.getAttribute("f_p");
+			filter_stops = (String) session.getAttribute("n_s");
+			filter_airline = (String) session.getAttribute("a_n");
+			if(type.equals(""))
+			System.out.println(filter_airline);
+			rs = st.executeQuery("select * from Flights where num_stops=" + filter_stops + " and " + type + filter_price + " order by " + type);
+
+		}
 	    
     %>
-    
+       
     <%if(trip.equals("One-Way")){ %>
 	
 		<h1>One Way Flights</h1>
@@ -114,12 +131,12 @@
 			<TH>Flight Type</TH>
 			<TH>Trip Type</TH>
 			<TH>Departure</TH>
-			<TH><%=session.getAttribute("class")%> Price</TH>
 			<TH>Destination</TH>
 			<TH>Depart Day</TH>
 			<TH>Arrival Day</TH>
 			<TH>Depart Time</TH>
 			<TH>Arrival Time</TH>
+			<TH><%=session.getAttribute("class")%> Price</TH>
 		</TR>
 		<% while(rs.next()){ %>
 		<TR>
@@ -127,40 +144,36 @@
 			<TD><%= rs.getString(2) %></TD>
 			<TD><%= rs.getString(3) %></td>
 			<TD><%= rs.getString(4) %></TD>
-			<TD><%= rs.getString(5) %></td>
+			<TD><%= rs.getString(5) %></TD>
 			<TD><%= rs.getString(6) %></TD>
 			<TD><%= rs.getString(7) %></TD>
-			<TD><%= rs.getString(8) %></TD>
-			<TD><%= rs.getString(9) %></td>	
+			<TD><%= rs.getString(8) %></td>	
+			<TD><%= rs.getString(9) %></td>
 			<TD><%= rs.getString(10) %></td>
 		</TR>
 		<% } %>
 	</TABLE>	
 	<br>
 	
-	<!-- insert new table here -->
-	<%
+	<br>
 	
-	ResultSet resultSet;
-	Statement resultState = con.createStatement();
-	String sorting_parameter = null;
-	String filter_price = null;
-	String filter_stops = null;
-	String filter_airline = null;
+	<form action="reservation.jsp" method="POST">
+	Flight Number: 
+	<input type="text" name="flight_num">
+	<strong>Flight Type:</strong>
+		<select name = "flight-trip">
+			<option value="fare_economy">fare_economy</option>
+			<option value="fare_business">fare_business</option>
+			<option value="fare_first">fare_first</option>
+		</select>
+	<button type="submit">Choose a Flight</button>
+	</form>
 	
-	sorting_parameter = (String) session.getAttribute("s_p");
-	filter_price = (String) session.getAttribute("f_p");
-	filter_stops = (String) session.getAttribute("n_s");
-	filter_airline = (String) session.getAttribute("a_n");
 	
-	
-	//resultSet = resultState.executeQuery("select * from Flights where num_stops = " + filter_stops + " and price " + filter_price + " and airline = " + filter_airline + " order by " + sorting_parameter);
-	
-	%>
 	
 	<form action = "flightSearchResults.jsp" method = "POST">		
 		Sort by:
-			<input type="radio" name="sort" value="price" checked> Price
+			<input type="radio" name="sort" value= <%=session.getAttribute("class")%> checked> <%=session.getAttribute("class")%> 
     		<input type="radio" name="sort" value="depart_time"> Departure time
 			<input type="radio" name="sort" value="arrive_time"> Arrival time<br> <br>
 		
@@ -177,14 +190,7 @@
  		<br> <br>
  		
  		Airline: 
- 		<select name = "airline_name">
-  			<option value="1">Spirit</option>
-  			<option value="2">Frontier</option>
-  			<option value="3">United Airlines</option>
-  			<option value="4">Delta</option>
-  			<option value="5">American Airlines</option>
-  			<option value="6">Alaska Airlines</option>
-		</select>
+ 		<input type="text" name="airline_name" value = "AA">
 		
 		<br> <br>	
 		

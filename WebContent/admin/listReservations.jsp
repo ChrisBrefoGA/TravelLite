@@ -28,9 +28,45 @@ try{
 		Here is a list of reservations: 
     </h1>
 
-    <%-- query --%>
+    <%
+    String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
+    Class.forName("com.mysql.jdbc.Driver");//SQL connection stuff
+	Connection con = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");//SQL connection stuff
+	String inputType = request.getParameter("inputType");
+	String input = request.getParameter("input");
+	Statement st = con.createStatement();
+	ResultSet rs = null;
+	if (inputType.equals("flight_num")) {
+		rs = st.executeQuery("select * from Ticket where " + inputType + " = " + input);
+	}
+	else if (inputType.equals("userid")) {
+		rs = st.executeQuery("select * from Ticket where " + inputType + " = '" + input + "'");
+	}
+    %>
 
     <%-- table --%>
+	<TABLE BORDER="1">
+		<TR>
+			<TH>Ticket Number</TH>
+			<TH>Round Trip</TH>
+			<TH>Booking Fee</TH>
+			<TH>Issue Date</TH>
+			<TH>Flight Number</TH>
+			<TH>Username</TH>
+			<TH>Total Fare</TH>
+		</TR>
+		<% while(rs.next()){ %>
+		<TR>
+			<TD><%= rs.getString(1) %></TD>
+			<TD><%= rs.getString(2) %></TD>
+			<TD><%= rs.getString(3) %></TD>
+			<TD><%= rs.getString(4) %></TD>
+			<TD><%= rs.getString(5) %></TD>
+			<TD><%= rs.getString(6) %></TD>
+			<TD><%= rs.getString(7) %></TD>
+		</TR>
+		<% } %>
+	</TABLE>
 
     <br>
 
