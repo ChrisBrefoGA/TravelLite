@@ -28,9 +28,32 @@ try{
 		Here is your revenue summary: 
     </h1>
 
-    <%-- query --%>
+    <%
+    String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
+    Class.forName("com.mysql.jdbc.Driver");//SQL connection stuff
+	Connection con = DriverManager.getConnection(url,"Admin_Saber", "ChrisBrefo63!");//SQL connection stuff
+	String inputType = request.getParameter("inputType");
+	String input = request.getParameter("input");
+	Statement st = con.createStatement();
+	ResultSet rs = null;
+	if(inputType.equals("flight_num")){
+		rs = st.executeQuery("select flight_num, total_fare from (select flight_num, sum(total_fare) from Ticket group by flight_num order by total_fare) limit 1");
+		
+	}
+    %>
 
-    <%-- table --%>
+    <TABLE BORDER="1">
+	<TR>
+		<TH>Flight Umber</TH>
+		<TH>Total Fare</TH>
+	</TR>
+	<% while(rs.next()){ %>
+	<TR>
+		<TD><%= rs.getString(1) %></td>
+		<TD><%= rs.getString(2) %></TD>
+	</TR>
+	<% } %>
+</TABLE>
 
     <br>
 
