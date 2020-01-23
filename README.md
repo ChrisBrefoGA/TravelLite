@@ -1,2 +1,2 @@
-# CS336_Bangers
+# TravelLite
 Online Travel Reservation System
