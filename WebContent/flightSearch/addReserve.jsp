@@ -25,7 +25,7 @@ Your Reservation is confirmed. Thank you for choosing TravelLite. We hope you Tr
 Your Ticket:
 
 <% 
-try{
+
 	String url = "jdbc:mysql://db336.cwmds0owoihg.us-east-2.rds.amazonaws.com:3306/TravelLite";
 //	String flight_num = request.getParameter("flight_num");
 //	System.out.println(flight_num);
@@ -48,15 +48,7 @@ try{
 //	rs = st.executeQuery("INSERT INTO Ticket (ticket_num, round_trip, booking_fee, issue_date, total_fare)"+"VALUES(1, no, 25, 2019/12/11, 175)");
 //	rs = st.executeQuery("INSERT INTO Ticket (ticket_num, round_trip, booking_fee, issue_date, total_fare)"+"VALUES(?, ?, ?, ?, ?)");
 	rs = st.executeQuery("select * from Ticket where ticket_num=1025");	
-}
-catch(SQLException a) {
-    System.out.println(a);
-    System.out.println("Error in sql statements.");	
-}
-catch(Exception a){
-	System.out.println(a);
-	System.out.println("Error in sql statements.");	
-}
+
 %>
 
 <TABLE BORDER="1">
@@ -66,7 +58,7 @@ catch(Exception a){
 		<TH>Booking Fee</TH>
 		<TH>Issue Date</TH>
 		<TH>Total Fare</TH>
-		<TH>Username</TH>
+		<TH>User-name</TH>
 		<TH>Flight Number</TH>
 	</TR>
 	<% while(rs.next()){ %>

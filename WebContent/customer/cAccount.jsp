@@ -76,7 +76,7 @@ String flightNum = request.getParameter("Flight");
 </div>
 	<%}%>
 	<br><br>
-	<a href='cRepHome.jsp'>Home Page</a>
+	<a href='customerHome.jsp'>Home Page</a>
 	<a href='../logout.jsp'>Log out</a>
 </body>
 </html>

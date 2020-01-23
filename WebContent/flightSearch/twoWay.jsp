@@ -54,9 +54,9 @@ session.setAttribute("Filter", "none");
 		<strong>To:</strong> <input type="text" name="TO"/> <br /> <br>
 
 		<strong>Number of Passengers:</strong> <input name="someid" type="number"/> <br><br> 
-		<strong>Departure Date:</strong> <input type="date" name="DEPARTURE DATE" />
+		<strong>Departure Date:(YYYY-MM-DD)</strong> <input type="date" name="DEPARTURE DATE" />
 
-		<strong>Return Date:</strong> <input type="date" name="RETURN DATE" /> <br /> <br>
+		<strong>Return Date:(YYYY-MM-DD)</strong> <input type="date" name="RETURN DATE" /> <br /> <br>
 
 		<strong>Flight Type:</strong>
 		<select name = "type">

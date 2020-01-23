@@ -18,7 +18,6 @@ try{
 %>
 
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,12 +96,7 @@ try{
 */		
 		
 %>
-
-
 This is your ticket. Confirm your reservation. <br> <br>
-
-
-
 <TABLE BORDER="1">
 		<TR>
 			<TH>Flight Number</TH>
@@ -116,11 +110,9 @@ This is your ticket. Confirm your reservation. <br> <br>
 			<TH>Class</TH>
 			<TH>Base Price</TH>
 			<TH>Booking Fee</TH>
-			<TH>Total Fee</TH>
-			
+			<TH>Total Fee</TH>			
 		</TR>
-		<% while(rs.next()){ %>
-		
+		<% while(rs.next()){ %>		
 		<TR>
 			<TD><%= flight_num %></td>
 			<TD><%= rs.getString(2) %></td>
@@ -134,17 +126,10 @@ This is your ticket. Confirm your reservation. <br> <br>
 			<TD><%= rs.getInt(1)%></TD>
 			<TD><%= 25 %>
 			<TD><%= rs.getInt(1) + 25%></TD>
-
 		</TR>
 		<% } %>
 	</TABLE>
-
-	<br> <br>
-	
-
-
-	
-	
+	<br> <br>	
 	<%// }else if(flight_trip.equals("Round-Trip") || flight_trip.equals("Flexible")){ %>
 		
 		<%//if(flight_trip.equals("Round-Trip")){ %>
